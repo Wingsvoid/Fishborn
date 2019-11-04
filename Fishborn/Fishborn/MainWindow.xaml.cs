@@ -55,8 +55,8 @@ namespace Fishborn
             foreach (Fish fish in simulation.Fishes)
             {
                 Rectangle rect = new Rectangle();
-                rect.Height = 40;
-                rect.Width = 80;
+                rect.Height = 16;
+                rect.Width = 32;
 
                 //заполнение кистей
                 rect.Fill = ib_RedFish;
