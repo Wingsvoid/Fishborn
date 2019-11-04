@@ -15,14 +15,14 @@
             <ColumnDefinition Width="784*"/>
         </Grid.ColumnDefinitions>
         <Canvas x:Name="Field" HorizontalAlignment="Left" Height="397" Margin="10,10,0,0" VerticalAlignment="Top" Width="302" Grid.ColumnSpan="2"/>
-        <Canvas x:Name="Fishlist" HorizontalAlignment="Left" Height="397" Margin="301,10,0,0" VerticalAlignment="Top" Width="157" Grid.Column="1">
+        <Canvas x:Name="Fishlist" HorizontalAlignment="Left" Height="397" Margin="301,10,0,0" VerticalAlignment="Top" Width="183" Grid.Column="1">
             <Canvas.Background>
                 <ImageBrush ImageSource="Image/Fishlist.png"/>
             </Canvas.Background>
-            <ListBox x:Name="ListAllFish" Height="377" Canvas.Left="10" Canvas.Top="10" Width="137" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF8AC9EE"/>
+            <ListBox x:Name="ListAllFish" Height="377" Canvas.Left="10" Canvas.Top="10" Width="163" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF8AC9EE"/>
 
         </Canvas>
-        <Canvas x:Name="Scrollbar" HorizontalAlignment="Left" Height="397" Margin="477.5,10,0,0" VerticalAlignment="Top" Width="296" Grid.Column="1">
+        <Canvas x:Name="Scrollbar" HorizontalAlignment="Left" Height="397" Margin="489,10,0,0" VerticalAlignment="Top" Width="284" Grid.Column="1">
             <Canvas.Background>
                 <ImageBrush ImageSource="Image/Scrollbar.png"/>
             </Canvas.Background>
