@@ -11,7 +11,10 @@ namespace Fishborn
     {
         private Point position;
         private int id;
+        private bool active;
 
+
+        public bool isActive { get => active; }
 
         public int Id { get => id; }
         public Point Pos { get => position; }
@@ -19,6 +22,11 @@ namespace Fishborn
         {
             id = _id;
             position = _pos;
+            active = true;
+        }
+        public void Disable()
+        {
+            active = false;
         }
     }
 }
