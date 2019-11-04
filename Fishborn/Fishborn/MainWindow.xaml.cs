@@ -58,8 +58,14 @@ namespace Fishborn
                 rect.Height = 16;
                 rect.Width = 32;
 
+                //if (fish.Speed == )
+                //{
+
+                //}
                 //заполнение кистей
                 rect.Fill = ib_RedFish;
+
+
 
                 rectangles.Add(rect);
                 Field.Children.Add(rect);

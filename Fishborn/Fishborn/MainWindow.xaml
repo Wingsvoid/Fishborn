@@ -25,6 +25,14 @@
             <Canvas.Background>
                 <ImageBrush ImageSource="Image/Scrollbar.png"/>
             </Canvas.Background>
+            <Slider Canvas.Left="124" Canvas.Top="30" Width="154"/>
+            <Slider Canvas.Left="124" Canvas.Top="105" Width="154"/>
+            <Slider Canvas.Left="124" Canvas.Top="180" Width="154"/>
+            <Slider Canvas.Left="124" Canvas.Top="255" Width="154"/>
+            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Доля выживших" Canvas.Top="16" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Margin="0" Padding="20,5,0,0" FontSize="14" Foreground="White" FontWeight="Bold"/>
+            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Количество этапов" Canvas.Top="91" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Padding="20,5,0,0" TextDecorations="{x:Null}" FontSize="14" Foreground="White" FontWeight="Bold"/>
+            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Время этапа" Canvas.Top="160" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Padding="20,20,0,0" FontSize="14" Foreground="White" FontWeight="Bold"/>
+            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Скорость симуляции" Canvas.Top="243" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Padding="20,5,0,0" FontSize="14" Foreground="White" FontWeight="Bold"/>
 
         </Canvas>
         <Button x:Name="restart" Content="Рестарт" HorizontalAlignment="Left" Height="28" Margin="488.5,412,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="restart_Click" Grid.Column="1" BorderBrush="{x:Null}">
