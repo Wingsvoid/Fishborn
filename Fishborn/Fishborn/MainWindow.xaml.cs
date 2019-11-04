@@ -68,6 +68,7 @@ namespace Fishborn
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 30);
             isStarted = false;
+            this.KeyDown += new KeyEventHandler(GameScreen_KeyDown);
         }
 
         private void pause_Click(object sender, RoutedEventArgs e)
@@ -162,22 +163,29 @@ namespace Fishborn
             }
             foreach (Fish fish in simulation.Fishes)
             {
-                if (!fish.isAlive)
+                if (fish.Direction.X <= 0)
                 {
                     Brush image = rectangles[fish.Id].Fill.Clone();
-                    image.RelativeTransform = new ScaleTransform(1, -1, 0.5, 0.5);
+                    image.RelativeTransform = new ScaleTransform(1, 1, 0.5, 0.5);
+                    if (!fish.isAlive)
+                    {
+                        image.RelativeTransform = new ScaleTransform(1, -1, 0.5, 0.5);
+                    }
                     rectangles[fish.Id].Fill = image;
                 }
-                //if (fish.Direction.X <= 0)
-                //{
-                //    Brush image = rectangles[fish.Id].Fill.Clone();
-                //    image.RelativeTransform = new ScaleTransform(1, 1, 0.5, 0.5);
-                //}
-                //if (fish.Direction.X >= 0)
-                //{
-                //    Brush image = rectangles[fish.Id].Fill.Clone();
-                //    image.RelativeTransform = new ScaleTransform(-1, 1, 0.5, 0.5);
-                //}
+                if (fish.Direction.X >= 0)
+                {
+                    Brush image = rectangles[fish.Id].Fill.Clone();
+                    image.RelativeTransform = new ScaleTransform(-1, 1, 0.5, 0.5);
+                    if (!fish.isAlive)
+                    {
+                        image.RelativeTransform = new ScaleTransform(1, -1, 0.5, 0.5);
+
+                    }
+                    rectangles[fish.Id].Fill = image;
+                }
+
+
 
                 grids[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y-8);
                 textBlocks[fish.Id].Text = fish.ShortInfo();
@@ -219,6 +227,33 @@ namespace Fishborn
             {
                 this.Close();
             }
+        }
+
+        private void GameScreen_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.S:
+                    if (isStarted)
+                    {
+                        if (isPaused)
+                        {
+                            dispatcherTimer.Start();
+                            isPaused = false;
+                            timePrev = DateTime.Now;
+                        }
+                        else
+                        {
+                            dispatcherTimer.Stop();
+                            isPaused = true;
+                        }
+                    }
+                    break;
+                default:
+                    //MessageBox.Show();
+                    break;
+            }
+
         }
     }
 }
