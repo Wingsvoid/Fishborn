@@ -25,6 +25,7 @@ namespace Fishborn
         {
             random = new Random();
             generations = new List<Generation>();
+            Plants = new List<Plant>();
             fieldSizeX = _fieldSizeX;
             fieldSizeY = _fieldSizeY;
             gameSpeed = _gameSpeed;
@@ -37,6 +38,10 @@ namespace Fishborn
         public void Update(double time)
         {
             stageTime += time;
+            if (stageTime/2000 >= Plants.Count)
+            {
+                CreatePlant();
+            }
             foreach (Fish fish in Fishes)
             {
                 if (fish.isAlive)

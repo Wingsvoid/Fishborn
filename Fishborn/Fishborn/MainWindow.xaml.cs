@@ -23,12 +23,13 @@ namespace Fishborn
         Simulation simulation;
 
         List<Rectangle> rectangles;
+        List<Rectangle> rectPlants;
 
         //кисти
         ImageBrush ib_RedFish;
         ImageBrush ib_YellowFish;
         ImageBrush ib_GreenFish;
-        ImageBrush ib_DeadFish;
+        ImageBrush ib_Plant;
 
         System.Windows.Threading.DispatcherTimer dispatcherTimer;
         DateTime timeStart;
@@ -51,14 +52,13 @@ namespace Fishborn
             ib_RedFish = new ImageBrush();
             ib_YellowFish = new ImageBrush();
             ib_GreenFish = new ImageBrush();
-            ib_DeadFish = new ImageBrush();
+            ib_Plant = new ImageBrush();
 
             //источники изображения
             ib_RedFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/RedFish.png", UriKind.Absolute));
             ib_YellowFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/YellowFish.png", UriKind.Absolute));
             ib_GreenFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/GreenFish.png", UriKind.Absolute));
-            ib_DeadFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/DeadFish.png", UriKind.Absolute));
-
+            ib_Plant.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/Plant.png", UriKind.Absolute));
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -74,6 +74,7 @@ namespace Fishborn
                 {
                     dispatcherTimer.Start();
                     isPaused = false;
+                    timePrev = DateTime.Now;
                 }
                 else
                 {
@@ -88,6 +89,7 @@ namespace Fishborn
 
             simulation = new Simulation(Field.Width, Field.Height, 1, 12);
             rectangles = new List<Rectangle>();
+            rectPlants = new List<Rectangle>();
 
             foreach (Fish fish in simulation.Fishes)
             {
@@ -137,11 +139,20 @@ namespace Fishborn
             foreach (Fish fish in simulation.Fishes)
             {
                 rectangles[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
-
-                if (!fish.isAlive)
-                {
-                    //rectangles[fish.Id].Fill = ib_DeadFish;
-                }
+                //if (!fish.isAlive)
+                //{
+                //    rectangles[fish.Id].Fill = dead
+                //}
+            }
+            if (simulation.Plants.Count > rectPlants.Count)
+            {
+                Rectangle rect = new Rectangle();
+                rect.Height = 16;
+                rect.Width = 32;
+                rect.Fill = ib_Plant;
+                rectPlants.Add(rect);
+                Field.Children.Add(rect);
+                rect.RenderTransform = new TranslateTransform(simulation.Plants[rectPlants.Count - 1].Pos.X, simulation.Plants[rectPlants.Count - 1].Pos.Y);
             }
             timePrev = timeNext;
         }
