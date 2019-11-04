@@ -19,6 +19,7 @@
             <Canvas.Background>
                 <ImageBrush ImageSource="Image/Fishlist.png"/>
             </Canvas.Background>
+            <ListBox x:Name="ListAllFish" Height="377" Canvas.Left="10" Canvas.Top="10" Width="137" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF8AC9EE"/>
 
         </Canvas>
         <Canvas x:Name="Scrollbar" HorizontalAlignment="Left" Height="397" Margin="477.5,10,0,0" VerticalAlignment="Top" Width="296" Grid.Column="1">
