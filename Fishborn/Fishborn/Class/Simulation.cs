@@ -47,24 +47,39 @@ namespace Fishborn
                 if (fish.isAlive)
                 {
                     fish.UpTime(time);
+                    foreach (Plant plant in Plants)
+                    {
+                        double distanceToPlant = CalculateLength(new Vector(plant.Pos.X - fish.Pos.X, plant.Pos.Y - fish.Pos.Y));
+                        if (distanceToPlant <= fish.Visibility && distanceToPlant <= CalculateLength(fish.Direction))
+                        {
+                            if (plant.isActive)
+                            {
+                                fish.SetDestination(plant.Pos);
+                                if (distanceToPlant == 0)
+                                {
+                                    fish.EatPlant();
+                                    plant.Disable();
+                                    fish.SetDestination(RandomPoint());
+                                }
+                            }                                
+                        }
+                    }
                     FishMovement(fish, fish.Speed * gameSpeed * (time / 1000) * 10);
                 }
                 else
                 {
                     FishMovement(fish, 5 * gameSpeed * (time / 1000) * 10);
                 }
-
             }
-
-
-
         }
 
         private void FishMovement(Fish fish, double speed)
         {
             Vector pos = new Vector(fish.Pos.X, fish.Pos.Y);
             Vector dest = new Vector(fish.Destination.X, fish.Destination.Y);
-            Vector step = Vector.Multiply(fish.Direction, speed);
+            Vector normDir = fish.Direction;
+            normDir.Normalize();
+            Vector step = Vector.Multiply(normDir, speed);
 
             if (CalculateLength(Vector.Subtract(dest, pos)) <= CalculateLength(step))
             {
@@ -89,10 +104,11 @@ namespace Fishborn
                 generation = new Generation(generations.Count);
             for (int i=0; i<fishNumber; i++)
             {
-                double speed = random.Next(1, 10);
-                double visibility = random.Next(1, 10);
-                double hungertime = random.Next(1, 10);
-                Fish fish = new Fish(generation.Id, generation.Id + i, speed, visibility, hungertime, RandomPoint());
+                double speed = random.Next(10, 100);
+                double visibility = random.Next(10, 100);
+                double hungertime = random.Next(10, 100);
+                double summ = speed + visibility + hungertime;
+                Fish fish = new Fish(generation.Id, generation.Id + i, speed/summ, visibility/summ, hungertime/summ, RandomPoint());
                 fish.SetDestination(RandomPoint());
                 generation.SetFish(fish);
             }

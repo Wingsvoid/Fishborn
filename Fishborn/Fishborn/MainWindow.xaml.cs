@@ -97,17 +97,17 @@ namespace Fishborn
                 rect.Height = 16;
                 rect.Width = 32;
 
-                if (fish.Speed == Math.Max(fish.Speed, Math.Max(fish.Visibility, fish.Hunger_time)))
+                if (fish.SpeedMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
                 {
                     rect.Fill = ib_RedFish;
                 }
 
-                if (fish.Visibility == Math.Max(fish.Speed, Math.Max(fish.Visibility, fish.Hunger_time)))
+                if (fish.VisibilityMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
                 {
                     rect.Fill = ib_GreenFish;
                 }
 
-                if (fish.Hunger_time == Math.Max(fish.Speed, Math.Max(fish.Visibility, fish.Hunger_time)))
+                if (fish.Hunger_timeMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
                 {
                     rect.Fill = ib_YellowFish;
                 }
@@ -136,14 +136,6 @@ namespace Fishborn
             timeNext = DateTime.Now;
             double time = (timeNext - timePrev).TotalMilliseconds;
             simulation.Update(time);
-            foreach (Fish fish in simulation.Fishes)
-            {
-                rectangles[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
-                //if (!fish.isAlive)
-                //{
-                //    rectangles[fish.Id].Fill = dead
-                //}
-            }
             if (simulation.Plants.Count > rectPlants.Count)
             {
                 Rectangle rect = new Rectangle();
@@ -154,6 +146,21 @@ namespace Fishborn
                 Field.Children.Add(rect);
                 rect.RenderTransform = new TranslateTransform(simulation.Plants[rectPlants.Count - 1].Pos.X, simulation.Plants[rectPlants.Count - 1].Pos.Y);
             }
+            foreach (Fish fish in simulation.Fishes)
+            {
+                rectangles[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
+                //if (!fish.isAlive)
+                //{
+                //    rectangles[fish.Id].Fill = dead
+                //}
+
+            }
+            foreach (Plant plant in simulation.Plants)
+            {
+                if (!plant.isActive)
+                    rectPlants[plant.Id].Visibility = Visibility.Collapsed;
+            }
+
             timePrev = timeNext;
         }
         private void restart_Click(object sender, RoutedEventArgs e)
@@ -162,6 +169,8 @@ namespace Fishborn
             {
                 Field.Children.Clear();
                 start.IsEnabled = true;
+                dispatcherTimer.Stop();
+                isPaused = true;
             }
         }
 
