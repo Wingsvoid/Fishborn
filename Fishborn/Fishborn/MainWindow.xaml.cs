@@ -136,23 +136,6 @@ namespace Fishborn
             timeNext = DateTime.Now;
             double time = (timeNext - timePrev).TotalMilliseconds;
             simulation.Update(time);
-            foreach (Fish fish in simulation.Fishes)
-            {
-                rectangles[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
-                //if (!fish.isAlive)
-                //{
-                //    rectangles[fish.Id].Fill = dead
-                //}
-                foreach(Plant plant in simulation.Plants)
-                {
-                    if (rectangles[fish.Id].RenderedGeometry.Bounds.IntersectsWith(rectPlants[plant.Id].RenderedGeometry.Bounds))
-                    {
-                        fish.EatPlant();
-                        plant.Disable();
-                        rectPlants[plant.Id].Visibility = Visibility.Collapsed;
-                    }
-                }
-            }
             if (simulation.Plants.Count > rectPlants.Count)
             {
                 Rectangle rect = new Rectangle();
@@ -163,6 +146,21 @@ namespace Fishborn
                 Field.Children.Add(rect);
                 rect.RenderTransform = new TranslateTransform(simulation.Plants[rectPlants.Count - 1].Pos.X, simulation.Plants[rectPlants.Count - 1].Pos.Y);
             }
+            foreach (Fish fish in simulation.Fishes)
+            {
+                rectangles[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
+                //if (!fish.isAlive)
+                //{
+                //    rectangles[fish.Id].Fill = dead
+                //}
+
+            }
+            foreach (Plant plant in simulation.Plants)
+            {
+                if (!plant.isActive)
+                    rectPlants[plant.Id].Visibility = Visibility.Collapsed;
+            }
+
             timePrev = timeNext;
         }
         private void restart_Click(object sender, RoutedEventArgs e)
