@@ -15,8 +15,11 @@ namespace Fishborn
         private int id;
         private int genId;
         private double speed;
+        private double speedMod;
         private double visibility;
+        private double visibilityMod;
         private double hungertime;
+        private double hungertimeMod;
         private double starvingtime;
         private double lifetime;
         private bool alive;
@@ -25,8 +28,11 @@ namespace Fishborn
         public int Id { get => id; }
         public int GenId { get => genId; }
         public double Speed { get => speed; }
+        public double SpeedMod { get => speedMod; }
         public double Visibility { get => visibility; }
+        public double VisibilityMod { get => visibilityMod; }
         public double Hunger_time { get => hungertime;}
+        public double Hunger_timeMod { get => hungertimeMod; }
         public double LifeTime { get => lifetime;}
         public double StarvingTime { get => starvingtime; }
         public Point Pos { get => position; }
@@ -38,9 +44,12 @@ namespace Fishborn
             genId = _genId;
             id = _id;
             position = _pos;
-            speed = _speed;
-            visibility = _visibility;
-            hungertime = _hungertime;
+            speedMod = _speed;
+            speed = speedMod * 10;
+            visibilityMod = _visibility;
+            visibility = visibilityMod*350;
+            hungertimeMod = _hungertime;
+            hungertime = hungertimeMod*70;
             starvingtime = 0;
             lifetime = 0;
             alive = true;

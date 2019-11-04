@@ -70,11 +70,7 @@ namespace Fishborn
                 {
                     FishMovement(fish, 5 * gameSpeed * (time / 1000) * 10);
                 }
-
             }
-
-
-
         }
 
         private void FishMovement(Fish fish, double speed)
@@ -108,10 +104,11 @@ namespace Fishborn
                 generation = new Generation(generations.Count);
             for (int i=0; i<fishNumber; i++)
             {
-                double speed = random.Next(1, 10);
-                double visibility = random.Next(40, 100);
-                double hungertime = random.Next(1, 10);
-                Fish fish = new Fish(generation.Id, generation.Id + i, speed, visibility, hungertime, RandomPoint());
+                double speed = random.Next(10, 100);
+                double visibility = random.Next(10, 100);
+                double hungertime = random.Next(10, 100);
+                double summ = speed + visibility + hungertime;
+                Fish fish = new Fish(generation.Id, generation.Id + i, speed/summ, visibility/summ, hungertime/summ, RandomPoint());
                 fish.SetDestination(RandomPoint());
                 generation.SetFish(fish);
             }

@@ -97,17 +97,17 @@ namespace Fishborn
                 rect.Height = 16;
                 rect.Width = 32;
 
-                if (fish.Speed == Math.Max(fish.Speed, Math.Max(fish.Visibility, fish.Hunger_time)))
+                if (fish.SpeedMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
                 {
                     rect.Fill = ib_RedFish;
                 }
 
-                if (fish.Visibility == Math.Max(fish.Speed, Math.Max(fish.Visibility, fish.Hunger_time)))
+                if (fish.VisibilityMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
                 {
                     rect.Fill = ib_GreenFish;
                 }
 
-                if (fish.Hunger_time == Math.Max(fish.Speed, Math.Max(fish.Visibility, fish.Hunger_time)))
+                if (fish.Hunger_timeMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
                 {
                     rect.Fill = ib_YellowFish;
                 }
@@ -169,6 +169,8 @@ namespace Fishborn
             {
                 Field.Children.Clear();
                 start.IsEnabled = true;
+                dispatcherTimer.Stop();
+                isPaused = true;
             }
         }
 
