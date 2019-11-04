@@ -94,5 +94,23 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\seabottom1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Рамка.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Fishlist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Scrollbar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Buttonmove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Buttonpress.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

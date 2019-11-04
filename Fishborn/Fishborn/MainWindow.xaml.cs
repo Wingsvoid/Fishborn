@@ -24,5 +24,25 @@ namespace Fishborn
         {
             InitializeComponent();
         }
+
+        private void pause_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void start_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void restart_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void exit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
