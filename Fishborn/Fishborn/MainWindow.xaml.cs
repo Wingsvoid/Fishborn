@@ -26,6 +26,9 @@ namespace Fishborn
 
         //кисти
         ImageBrush ib_RedFish;
+        ImageBrush ib_YellowFish;
+        ImageBrush ib_GreenFish;
+
         System.Windows.Threading.DispatcherTimer dispatcherTimer;
         DateTime timeStart;
         DateTime timeNext;
@@ -46,9 +49,14 @@ namespace Fishborn
 
             //создание кистей
             ib_RedFish = new ImageBrush();
+            ib_YellowFish = new ImageBrush();
+            ib_GreenFish = new ImageBrush();
 
             //источники изображения
             ib_RedFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/RedFish.png", UriKind.Absolute));
+            ib_YellowFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/YellowFish.png", UriKind.Absolute));
+            ib_GreenFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/GreenFish.png", UriKind.Absolute));
+
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -81,15 +89,23 @@ namespace Fishborn
                 rect.Height = 16;
                 rect.Width = 32;
 
-                //if (fish.Speed == )
-                //{
+                if (fish.Speed == Math.Max(fish.Speed, Math.Max(fish.Visibility, fish.Hunger_time)))
+                {
+                    rect.Fill = ib_RedFish;
+                }
 
-                //}
-                //заполнение кистей
-                rect.Fill = ib_RedFish;
+                if (fish.Visibility == Math.Max(fish.Speed, Math.Max(fish.Visibility, fish.Hunger_time)))
+                {
+                    rect.Fill = ib_GreenFish;
+                }
 
+                if (fish.Hunger_time == Math.Max(fish.Speed, Math.Max(fish.Visibility, fish.Hunger_time)))
+                {
+                    rect.Fill = ib_YellowFish;
+                }
 
-
+                          
+               
                 rectangles.Add(rect);
                 Field.Children.Add(rect);
                 rect.RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
