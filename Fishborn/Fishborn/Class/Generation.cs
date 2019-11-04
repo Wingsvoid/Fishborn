@@ -14,6 +14,7 @@ namespace Fishborn.Class
         public Generation(int _id)
         {
             id = _id;
+            Fishes = new List<Fish>();
         }
         public void SetFish (Fish _fish)
         {

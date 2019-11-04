@@ -20,9 +20,29 @@ namespace Fishborn
     /// </summary>
     public partial class MainWindow : Window
     {
+        Simulation simulation;
+
+        List<Rectangle> rectangles;
+
+        //кисти
+        ImageBrush ib_RedFish;
+
+
         public MainWindow()
         {
             InitializeComponent();
+
+            simulation = new Simulation(302, 397, 1, 12);
+            rectangles = new List<Rectangle>();
+
+
+           
+            //создание кистей
+            ib_RedFish = new ImageBrush();
+
+            //источники изображения
+            ib_RedFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/RedFish.png", UriKind.Absolute));
+
         }
 
         private void pause_Click(object sender, RoutedEventArgs e)
@@ -32,6 +52,19 @@ namespace Fishborn
 
         private void start_Click(object sender, RoutedEventArgs e)
         {
+            foreach (Fish fish in simulation.Fishes)
+            {
+                Rectangle rect = new Rectangle();
+                rect.Height = 40;
+                rect.Width = 80;
+
+                //заполнение кистей
+                rect.Fill = ib_RedFish;
+
+                rectangles.Add(rect);
+                Field.Children.Add(rect);
+                rect.RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
+            }
 
         }
 

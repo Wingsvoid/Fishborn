@@ -23,6 +23,8 @@ namespace Fishborn
 
         public Simulation(double _fieldSizeX, double _fieldSizeY, int _gameSpeed, int _fishNumber)
         {
+            random = new Random();
+            generations = new List<Generation>();
             fieldSizeX = _fieldSizeX;
             fieldSizeY = _fieldSizeY;
             gameSpeed = _gameSpeed;
@@ -30,6 +32,7 @@ namespace Fishborn
             CreateRandomGeneration();
             Fishes = generations[0].Fishes;
             stageTime = 0;
+            
         }
         public void Update(double time)
         {
@@ -50,7 +53,11 @@ namespace Fishborn
         }
         private void CreateRandomGeneration()
         {
-            Generation generation = new Generation(generations.Count);
+            Generation generation;
+            if (generations == null)
+                generation = new Generation(0);
+            else
+                generation = new Generation(generations.Count);
             for (int i=0; i<fishNumber; i++)
             {
                 double speed = random.Next(1, 10);
