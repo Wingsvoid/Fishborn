@@ -49,22 +49,23 @@ namespace Fishborn
 
         private void FishMovement(Fish fish, double _time)
         {
+            //_time /= 500;
             Vector pos = new Vector(fish.Pos.X, fish.Pos.Y);
             Vector dest = new Vector(fish.Destination.X, fish.Destination.Y);
-            Vector dir = fish.Direction;
-            Vector step = Vector.Divide(dir, fish.Speed * gameSpeed * _time);
+            Vector step = Vector.Multiply(fish.Direction, fish.Speed * gameSpeed * (_time/1000)*10);
 
-            if (CalculateDistance(Vector.Subtract(dest, pos)) < CalculateDistance(step))
+            if (CalculateLength(Vector.Subtract(dest, pos)) <= CalculateLength(step))
+            {
                 fish.SetPosition(fish.Destination);
+                fish.SetDestination(RandomPoint());
+            }
             else
                 fish.SetPosition(Vector.Add(step, fish.Pos));
-            if (fish.Pos == fish.Destination)
-                fish.SetDestination(RandomPoint());
         }
-        private double CalculateDistance(Vector distVector)
+        private double CalculateLength(Vector distVector)
         {
-            double distance = Math.Sqrt(Math.Pow(distVector.X, 2)+Math.Pow(distVector.Y, 2));
-            return distance;
+            double length = Math.Sqrt(Math.Pow(distVector.X, 2)+Math.Pow(distVector.Y, 2));
+            return length;
         }
         private void CreateRandomGeneration()
         {

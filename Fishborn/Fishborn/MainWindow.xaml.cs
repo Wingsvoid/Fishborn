@@ -27,6 +27,11 @@ namespace Fishborn
         //кисти
         ImageBrush ib_RedFish;
         System.Windows.Threading.DispatcherTimer dispatcherTimer;
+        DateTime timeStart;
+        DateTime timeNext;
+        DateTime timePrev;
+        //DateTime timeEnd;
+        bool isStarted;
         bool isPaused;
 
 
@@ -34,7 +39,7 @@ namespace Fishborn
         {
             InitializeComponent();
 
-            simulation = new Simulation(302, 397, 1, 12);
+            simulation = new Simulation(Field.Width, Field.Height, 1, 12);
             rectangles = new List<Rectangle>();
 
 
@@ -48,11 +53,12 @@ namespace Fishborn
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 30);
+            isStarted = false;
         }
 
         private void pause_Click(object sender, RoutedEventArgs e)
         {
-            if (isPaused != null)
+            if (isStarted)
             {
                 if (isPaused)
                 {
@@ -90,9 +96,25 @@ namespace Fishborn
             }
 
             dispatcherTimer.Start();
+            timeStart = DateTime.Now;
+            timePrev = timeStart;
+            isStarted = true;
             isPaused = false;
         }
 
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            timeNext = DateTime.Now;
+            double time = (timeNext - timePrev).TotalMilliseconds;
+            //simulation.Update(time);
+            simulation.Update(1000 / 30);
+            foreach (Fish fish in simulation.Fishes)
+            {
+                rectangles[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
+            }
+            timePrev = timeNext;
+        }
         private void restart_Click(object sender, RoutedEventArgs e)
         {
 
@@ -105,14 +127,6 @@ namespace Fishborn
             if (result == MessageBoxResult.Yes)
             {
                 this.Close();
-            }
-        }
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            simulation.Update(1000 / 30);
-            foreach (Fish fish in simulation.Fishes)
-            {
-                rectangles[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
             }
         }
     }
