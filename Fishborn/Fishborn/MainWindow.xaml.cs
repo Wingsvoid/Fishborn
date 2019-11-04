@@ -163,27 +163,20 @@ namespace Fishborn
             }
             foreach (Fish fish in simulation.Fishes)
             {
+                Brush image = rectangles[fish.Id].Fill.Clone();
                 if (fish.Direction.X <= 0)
                 {
-                    Brush image = rectangles[fish.Id].Fill.Clone();
                     image.RelativeTransform = new ScaleTransform(1, 1, 0.5, 0.5);
-                    if (!fish.isAlive)
-                    {
-                        image.RelativeTransform = new ScaleTransform(1, -1, 0.5, 0.5);
-                    }
-                    rectangles[fish.Id].Fill = image;
                 }
-                if (fish.Direction.X >= 0)
+                else
                 {
-                    Brush image = rectangles[fish.Id].Fill.Clone();
                     image.RelativeTransform = new ScaleTransform(-1, 1, 0.5, 0.5);
-                    if (!fish.isAlive)
-                    {
-                        image.RelativeTransform = new ScaleTransform(1, -1, 0.5, 0.5);
-
-                    }
-                    rectangles[fish.Id].Fill = image;
                 }
+                if (!fish.isAlive)
+                {
+                    image.RelativeTransform = new ScaleTransform(1, -1, 0.5, 0.5);
+                }
+                rectangles[fish.Id].Fill = image;
 
 
 
