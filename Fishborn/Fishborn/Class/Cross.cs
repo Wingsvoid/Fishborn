@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fishborn
+namespace Fishborn.Class
 {
-    class Plant
+    class Cross
     {
     }
 }

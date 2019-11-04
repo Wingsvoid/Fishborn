@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fishborn
+namespace Fishborn.Class
 {
-    class Simulation
+    class Selector
     {
-        private List<Fish> Fishes;
-        private List<Plant> Plants;
     }
 }
