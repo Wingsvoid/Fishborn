@@ -42,8 +42,7 @@ namespace Fishborn
         {
             InitializeComponent();
 
-            simulation = new Simulation(Field.Width, Field.Height, 1, 12);
-            rectangles = new List<Rectangle>();
+           
 
 
 
@@ -83,6 +82,10 @@ namespace Fishborn
 
         private void start_Click(object sender, RoutedEventArgs e)
         {
+
+            simulation = new Simulation(Field.Width, Field.Height, 1, 12);
+            rectangles = new List<Rectangle>();
+
             foreach (Fish fish in simulation.Fishes)
             {
                 Rectangle rect = new Rectangle();
@@ -104,8 +107,12 @@ namespace Fishborn
                     rect.Fill = ib_YellowFish;
                 }
 
-                          
-               
+                if (start.IsEnabled == true)
+                {
+                    start.IsEnabled = false;
+                }
+
+
                 rectangles.Add(rect);
                 Field.Children.Add(rect);
                 rect.RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
@@ -133,7 +140,11 @@ namespace Fishborn
         }
         private void restart_Click(object sender, RoutedEventArgs e)
         {
-
+            if (restart.IsEnabled == true)
+            {
+                Field.Children.Clear();
+                start.IsEnabled = true;
+            }
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
