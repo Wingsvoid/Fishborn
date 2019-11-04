@@ -47,9 +47,9 @@ namespace Fishborn
         }
         public void UpTime(double time)
         {
-            lifetime += time;
-            starvingtime += time;
-            if (starvingtime == hungertime)
+            lifetime += time/1000;
+            starvingtime += time/1000;
+            if (starvingtime >= hungertime)
             {
                 Starved();
             }
@@ -75,6 +75,7 @@ namespace Fishborn
         private void Starved()
         {
             alive = false;
+            SetDestination(new Point(Pos.X, 0));
         }
     }
 }

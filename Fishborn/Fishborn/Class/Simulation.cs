@@ -39,25 +39,33 @@ namespace Fishborn
             stageTime += time;
             foreach (Fish fish in Fishes)
             {
-                fish.UpTime(time);
-                FishMovement(fish, time);
+                if (fish.isAlive)
+                {
+                    fish.UpTime(time);
+                    FishMovement(fish, fish.Speed * gameSpeed * (time / 1000) * 10);
+                }
+                else
+                {
+                    FishMovement(fish, 5 * gameSpeed * (time / 1000) * 10);
+                }
+
             }
 
 
 
         }
 
-        private void FishMovement(Fish fish, double _time)
+        private void FishMovement(Fish fish, double speed)
         {
-            //_time /= 500;
             Vector pos = new Vector(fish.Pos.X, fish.Pos.Y);
             Vector dest = new Vector(fish.Destination.X, fish.Destination.Y);
-            Vector step = Vector.Multiply(fish.Direction, fish.Speed * gameSpeed * (_time/1000)*10);
+            Vector step = Vector.Multiply(fish.Direction, speed);
 
             if (CalculateLength(Vector.Subtract(dest, pos)) <= CalculateLength(step))
             {
                 fish.SetPosition(fish.Destination);
-                fish.SetDestination(RandomPoint());
+                if (fish.isAlive)
+                    fish.SetDestination(RandomPoint());
             }
             else
                 fish.SetPosition(Vector.Add(step, fish.Pos));

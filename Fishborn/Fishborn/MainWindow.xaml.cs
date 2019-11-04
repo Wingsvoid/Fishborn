@@ -130,11 +130,14 @@ namespace Fishborn
         {
             timeNext = DateTime.Now;
             double time = (timeNext - timePrev).TotalMilliseconds;
-            //simulation.Update(time);
-            simulation.Update(1000 / 30);
+            simulation.Update(time);
             foreach (Fish fish in simulation.Fishes)
             {
                 rectangles[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
+                //if (!fish.isAlive)
+                //{
+                //    rectangles[fish.Id].Fill = dead
+                //}
             }
             timePrev = timeNext;
         }
