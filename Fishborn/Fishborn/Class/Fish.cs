@@ -85,5 +85,11 @@ namespace Fishborn
             alive = false;
             SetDestination(new Point(Pos.X, 0));
         }
+        public String Info()
+        {
+            string info = "genId: " + genId + " Id: " + id + " Spd: " + speed +
+                " Vis: " + visibility + " HTime: " + hungertime + " LTime: " + lifetime + " isAlive: " + alive;
+            return info;
+        }
     }
 }
