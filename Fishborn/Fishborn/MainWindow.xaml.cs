@@ -26,6 +26,8 @@ namespace Fishborn
 
         //кисти
         ImageBrush ib_RedFish;
+        System.Windows.Threading.DispatcherTimer dispatcherTimer;
+        bool isPaused;
 
 
         public MainWindow()
@@ -36,18 +38,33 @@ namespace Fishborn
             rectangles = new List<Rectangle>();
 
 
-           
+
             //создание кистей
             ib_RedFish = new ImageBrush();
 
             //источники изображения
             ib_RedFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/RedFish.png", UriKind.Absolute));
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 30);
         }
 
         private void pause_Click(object sender, RoutedEventArgs e)
         {
-
+            if (isPaused != null)
+            {
+                if (isPaused)
+                {
+                    dispatcherTimer.Start();
+                    isPaused = false;
+                }
+                else
+                {
+                    dispatcherTimer.Stop();
+                    isPaused = true;
+                }
+            }
         }
 
         private void start_Click(object sender, RoutedEventArgs e)
@@ -66,6 +83,8 @@ namespace Fishborn
                 rect.RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
             }
 
+            dispatcherTimer.Start();
+            isPaused = false;
         }
 
         private void restart_Click(object sender, RoutedEventArgs e)
@@ -78,8 +97,16 @@ namespace Fishborn
             MessageBoxResult result = MessageBox.Show("Вы действительно хотите выйти?", " ", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
-            {                
+            {
                 this.Close();
+            }
+        }
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            simulation.Update(1000 / 30);
+            foreach (Fish fish in simulation.Fishes)
+            {
+                rectangles[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
             }
         }
     }
