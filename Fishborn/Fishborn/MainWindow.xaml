@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fishborn"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowStyle="None" ResizeMode="CanMinimize">
+        Title="Fishborn" Height="450" Width="800" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="Image/seabottom1.png"/>
     </Window.Background>
@@ -27,25 +27,138 @@
             </Canvas.Background>
 
         </Canvas>
-        <Button x:Name="restart" Content="Рестарт" HorizontalAlignment="Left" Height="28" Margin="488.5,412,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="restart_Click" Grid.Column="1">
-            <Button.Background>
-                <ImageBrush ImageSource="Image/Buttonmove.png"/>
-            </Button.Background>
+        <Button x:Name="restart" Content="Рестарт" HorizontalAlignment="Left" Height="28" Margin="488.5,412,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="restart_Click" Grid.Column="1" BorderBrush="{x:Null}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/Image/Buttonmove.png"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter Property="Background" TargetName="border">
+                                            <Setter.Value>
+                                                <ImageBrush ImageSource="/Image/Buttonpress.png"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
         </Button>
-        <Button x:Name="exit" Content="Выход" HorizontalAlignment="Left" Height="28" Margin="634.5,412,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" FontSize="13" Foreground="#FF071632" Click="exit_Click" Grid.Column="1">
-            <Button.Background>
-                <ImageBrush ImageSource="Image/Buttonmove.png"/>
-            </Button.Background>
+        <Button x:Name="exit" Content="Выход" HorizontalAlignment="Left" Height="28" Margin="634.5,412,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" FontSize="13" Foreground="#FF071632" Click="exit_Click" Grid.Column="1" BorderBrush="{x:Null}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/Image/Buttonmove.png"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter Property="Background" TargetName="border">
+                                            <Setter.Value>
+                                                <ImageBrush ImageSource="/Image/Buttonpress.png"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+
         </Button>
-        <Button x:Name="start" Content="Старт" HorizontalAlignment="Left" Height="28" Margin="561.5,368,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="start_Click" Grid.Column="1">
-            <Button.Background>
-                <ImageBrush ImageSource="Image/Buttonmove.png"/>
-            </Button.Background>
+        <Button x:Name="start" Content="Старт" HorizontalAlignment="Left" Height="28" Margin="561.5,368,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="start_Click" Grid.Column="1" BorderBrush="{x:Null}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/Image/Buttonmove.png"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter Property="Background" TargetName="border">
+                                            <Setter.Value>
+                                                <ImageBrush ImageSource="/Image/Buttonpress.png"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
         </Button>
-        <Button x:Name="pause" Content="Пауза" HorizontalAlignment="Left" Height="28" Margin="78.5,412,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="pause_Click" Grid.Column="1">
-            <Button.Background>
-                <ImageBrush ImageSource="Image/Buttonmove.png"/>
-            </Button.Background>
+        <Button x:Name="pause" Content="Пауза" HorizontalAlignment="Left" Height="28" Margin="78.5,412,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="pause_Click" Grid.Column="1" BorderBrush="{x:Null}">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/Image/Buttonmove.png"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter Property="Background" TargetName="border">
+                                            <Setter.Value>
+                                                <ImageBrush ImageSource="/Image/Buttonpress.png"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
         </Button>
     </Grid>
 </Window>
