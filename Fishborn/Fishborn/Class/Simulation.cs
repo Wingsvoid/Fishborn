@@ -37,6 +37,11 @@ namespace Fishborn
         public void Update(double time)
         {
             stageTime += time;
+            foreach (Fish fish in Fishes)
+            {
+                fish.UpTime(time);
+                FishMovement(fish, time);
+            }
 
 
 
@@ -46,10 +51,20 @@ namespace Fishborn
         {
             Vector pos = new Vector(fish.Pos.X, fish.Pos.Y);
             Vector dest = new Vector(fish.Destination.X, fish.Destination.Y);
-            double FullOffsetX;
-            double FullOffsetY;
-            double PartOffsetX;
-            double PartOffsetY;
+            Vector dir = fish.Direction;
+            Vector step = Vector.Divide(dir, fish.Speed * gameSpeed * _time);
+
+            if (CalculateDistance(Vector.Subtract(dest, pos)) < CalculateDistance(step))
+                fish.SetPosition(fish.Destination);
+            else
+                fish.SetPosition(Vector.Add(step, fish.Pos));
+            if (fish.Pos == fish.Destination)
+                fish.SetDestination(RandomPoint());
+        }
+        private double CalculateDistance(Vector distVector)
+        {
+            double distance = Math.Sqrt(Math.Pow(distVector.X, 2)+Math.Pow(distVector.Y, 2));
+            return distance;
         }
         private void CreateRandomGeneration()
         {
@@ -64,6 +79,7 @@ namespace Fishborn
                 double visibility = random.Next(1, 10);
                 double hungertime = random.Next(1, 10);
                 Fish fish = new Fish(generation.Id, generation.Id + i, speed, visibility, hungertime, RandomPoint());
+                fish.SetDestination(RandomPoint());
                 generation.SetFish(fish);
             }
             generations.Add(generation);           
