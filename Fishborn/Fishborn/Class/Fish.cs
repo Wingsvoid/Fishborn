@@ -85,6 +85,12 @@ namespace Fishborn
             alive = false;
             SetDestination(new Point(Pos.X, 0));
         }
+
+        public String ShortInfo()
+        {
+            string shortInfo ="\n" + "\n" + Id + ", " + Math.Round(Hunger_time - StarvingTime);
+            return shortInfo;
+        }
         public String Info()
         {
             string info = "genId: " + genId + " Id: " + id + " Spd: " + speed +

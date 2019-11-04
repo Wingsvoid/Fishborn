@@ -23,7 +23,9 @@ namespace Fishborn
         Simulation simulation;
 
         List<Rectangle> rectangles;
+        List<Grid> grids;
         List<Rectangle> rectPlants;
+        List<TextBlock> textBlocks;
 
         //кисти
         ImageBrush ib_RedFish;
@@ -90,11 +92,14 @@ namespace Fishborn
             simulation = new Simulation(Field.Width, Field.Height, 1, 12);
             rectangles = new List<Rectangle>();
             rectPlants = new List<Rectangle>();
+            grids = new List<Grid>();
+            textBlocks = new List<TextBlock>();
 
             foreach (Fish fish in simulation.Fishes)
             {
-                Grid grid;
+                Grid grid = new Grid();
                 Rectangle rect = new Rectangle();
+                TextBlock text = new TextBlock();
                 rect.Height = 16;
                 rect.Width = 32;
 
@@ -117,11 +122,16 @@ namespace Fishborn
                 {
                     start.IsEnabled = false;
                 }
-
-
+                text.Text = fish.ShortInfo();
+                text.FontSize = 10;
+                textBlocks.Add(text);
                 rectangles.Add(rect);
-                Field.Children.Add(rect);
-                rect.RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
+                grid.Children.Add(text);
+                grid.Children.Add(rect);
+                
+                grids.Add(grid);
+                Field.Children.Add(grid);
+                grid.RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y-8);
             }
 
             dispatcherTimer.Start();
@@ -155,8 +165,8 @@ namespace Fishborn
                     image.RelativeTransform = new RotateTransform(180, 0.5, 0.5);
                     rectangles[fish.Id].Fill = image;
                 }
-                rectangles[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
-
+                grids[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y-8);
+                textBlocks[fish.Id].Text = fish.ShortInfo();
 
             }
             foreach (Plant plant in simulation.Plants)
