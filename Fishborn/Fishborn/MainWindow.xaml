@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Fishborn" Height="450" Width="800" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Window.Background>
-        <ImageBrush ImageSource="Image/seabottom1.png"/>
+        <ImageBrush ImageSource="Image/seabottom2.png"/>
     </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
