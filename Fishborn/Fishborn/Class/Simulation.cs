@@ -68,7 +68,9 @@ namespace Fishborn
                 }
                 else
                 {
+                    fish.SetDestination(new Point(fish.Pos.X, 0));
                     FishMovement(fish, 5 * gameSpeed * (time / 1000) * 10);
+                    
                 }
             }
         }
