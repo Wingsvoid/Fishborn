@@ -93,6 +93,7 @@ namespace Fishborn
 
             foreach (Fish fish in simulation.Fishes)
             {
+                Grid grid;
                 Rectangle rect = new Rectangle();
                 rect.Height = 16;
                 rect.Width = 32;
@@ -148,11 +149,14 @@ namespace Fishborn
             }
             foreach (Fish fish in simulation.Fishes)
             {
+                if (!fish.isAlive)
+                {
+                    Brush image = rectangles[fish.Id].Fill.Clone();
+                    image.RelativeTransform = new RotateTransform(180, 0.5, 0.5);
+                    rectangles[fish.Id].Fill = image;
+                }
                 rectangles[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y);
-                //if (!fish.isAlive)
-                //{
-                //    rectangles[fish.Id].Fill = dead
-                //}
+
 
             }
             foreach (Plant plant in simulation.Plants)
