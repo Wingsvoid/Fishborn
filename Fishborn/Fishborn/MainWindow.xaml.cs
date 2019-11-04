@@ -42,7 +42,12 @@ namespace Fishborn
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBox.Show("Вы действительно хотите выйти?", " ", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+            if (result == MessageBoxResult.Yes)
+            {                
+                this.Close();
+            }
         }
     }
 }
