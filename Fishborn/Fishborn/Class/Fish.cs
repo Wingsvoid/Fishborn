@@ -93,8 +93,9 @@ namespace Fishborn
         }
         public String Info()
         {
-            string info = "genId: " + genId + " Id: " + id + " Spd: " + speed +
-                " Vis: " + visibility + " HTime: " + hungertime + " LTime: " + lifetime + " isAlive: " + alive;
+            string info = "genId: " + genId + " Id: " + id + "\n" + " Spd: " + Math.Round(speed, 1) +
+                " Vis: " + Math.Round(visibility, 1) + "\n" +  " HTime: " + Math.Round(hungertime, 1) + 
+                " LTime: " + Math.Round(lifetime, 1) + "\n" + " isAlive: " + alive;
             return info;
         }
     }

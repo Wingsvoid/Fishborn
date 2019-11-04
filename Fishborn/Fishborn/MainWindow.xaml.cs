@@ -41,6 +41,8 @@ namespace Fishborn
         bool isStarted;
         bool isPaused;
 
+        List<Fish> listboxSource;
+
 
         public MainWindow()
         {
@@ -94,6 +96,7 @@ namespace Fishborn
             rectPlants = new List<Rectangle>();
             grids = new List<Grid>();
             textBlocks = new List<TextBlock>();
+            listboxSource = simulation.Fishes;
 
             foreach (Fish fish in simulation.Fishes)
             {
@@ -162,12 +165,22 @@ namespace Fishborn
                 if (!fish.isAlive)
                 {
                     Brush image = rectangles[fish.Id].Fill.Clone();
-                    image.RelativeTransform = new RotateTransform(180, 0.5, 0.5);
+                    image.RelativeTransform = new ScaleTransform(1, -1, 0.5, 0.5);
                     rectangles[fish.Id].Fill = image;
                 }
+                //if (fish.Direction.X <= 0)
+                //{
+                //    Brush image = rectangles[fish.Id].Fill.Clone();
+                //    image.RelativeTransform = new ScaleTransform(1, 1, 0.5, 0.5);
+                //}
+                //if (fish.Direction.X >= 0)
+                //{
+                //    Brush image = rectangles[fish.Id].Fill.Clone();
+                //    image.RelativeTransform = new ScaleTransform(-1, 1, 0.5, 0.5);
+                //}
+
                 grids[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y-8);
                 textBlocks[fish.Id].Text = fish.ShortInfo();
-
             }
             foreach (Plant plant in simulation.Plants)
             {
@@ -176,6 +189,16 @@ namespace Fishborn
             }
 
             timePrev = timeNext;
+            UpdateListBox();
+        }
+        private void UpdateListBox()
+        {
+            ListAllFish.Items.Clear();
+            listboxSource = listboxSource.OrderByDescending(o => o.LifeTime).ToList();
+            foreach (Fish fish in listboxSource)
+            {
+                ListAllFish.Items.Add(fish.Info());
+            }
         }
         private void restart_Click(object sender, RoutedEventArgs e)
         {
