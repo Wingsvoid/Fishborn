@@ -41,8 +41,8 @@ namespace Fishborn
 
         private void FishMovement(Fish fish, double _time)
         {
-            Point pos = fish.Pos;
-            Point dest = fish.Destination;
+            Vector pos = new Vector(fish.Pos.X, fish.Pos.Y);
+            Vector dest = new Vector(fish.Destination.X, fish.Destination.Y);
             double FullOffsetX;
             double FullOffsetY;
             double PartOffsetX;

@@ -69,6 +69,7 @@ namespace Fishborn
         public void SetDestination(Point newPoint)
         {
             destination = newPoint;
+            direction = new Vector(destination.X - position.X, destination.Y - position.Y);
         }
         private void Starved()
         {
