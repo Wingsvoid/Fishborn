@@ -47,6 +47,17 @@ namespace Fishborn
                 if (fish.isAlive)
                 {
                     fish.UpTime(time);
+                    foreach (Plant plant in Plants)
+                    {
+                        if (plant.isActive)
+                        {
+                            double distanceToPlant = CalculateLength(new Vector(plant.Pos.X - fish.Pos.X, plant.Pos.Y - fish.Pos.Y));
+                            if (distanceToPlant <= fish.Visibility && distanceToPlant <= CalculateLength(fish.Direction))
+                            {
+                                fish.SetDestination(plant.Pos);
+                            }
+                        }
+                    }
                     FishMovement(fish, fish.Speed * gameSpeed * (time / 1000) * 10);
                 }
                 else
@@ -64,7 +75,9 @@ namespace Fishborn
         {
             Vector pos = new Vector(fish.Pos.X, fish.Pos.Y);
             Vector dest = new Vector(fish.Destination.X, fish.Destination.Y);
-            Vector step = Vector.Multiply(fish.Direction, speed);
+            Vector normDir = fish.Direction;
+            normDir.Normalize();
+            Vector step = Vector.Multiply(normDir, speed);
 
             if (CalculateLength(Vector.Subtract(dest, pos)) <= CalculateLength(step))
             {

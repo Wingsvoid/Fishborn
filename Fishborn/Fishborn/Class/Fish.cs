@@ -70,7 +70,6 @@ namespace Fishborn
         {
             destination = newPoint;
             direction = new Vector(destination.X - position.X, destination.Y - position.Y);
-            direction.Normalize();
         }
         private void Starved()
         {

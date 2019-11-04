@@ -143,6 +143,15 @@ namespace Fishborn
                 //{
                 //    rectangles[fish.Id].Fill = dead
                 //}
+                foreach(Plant plant in simulation.Plants)
+                {
+                    if (rectangles[fish.Id].RenderedGeometry.Bounds.IntersectsWith(rectPlants[plant.Id].RenderedGeometry.Bounds))
+                    {
+                        fish.EatPlant();
+                        plant.Disable();
+                        rectPlants[plant.Id].Visibility = Visibility.Collapsed;
+                    }
+                }
             }
             if (simulation.Plants.Count > rectPlants.Count)
             {
