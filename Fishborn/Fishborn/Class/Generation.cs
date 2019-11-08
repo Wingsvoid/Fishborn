@@ -26,17 +26,17 @@ namespace Fishborn.Class
         {
             id = ancestors.Id + 1;
             Fishes = new List<Fish>();
-            Selector selector = new Selector(ancestors.Fishes);
+            Selector selector = new Selector(ancestors.Fishes, debug:false);
             Cross cross = new Cross();
-            Dictionary<Fish, Fish> parents;
+            List<List<Fish>> parents;
             List<Fish> survivers = new List<Fish>();
             List<Fish> childrens = new List<Fish>();
 
 
             foreach (Fish fish in ancestors.Fishes.Where(x => x.isAlive))
                     survivers.Add(fish);
-            parents = selector.GetPairs(10 - survivers.Count);
 
+            parents = selector.GetPairs(10 - survivers.Count);
             //foreach (KeyValuePair<Fish, Fish> pair in parents)
             //{
             //    childrens.Add(cross.GiveBirth(pair.Key, pair.Value));
