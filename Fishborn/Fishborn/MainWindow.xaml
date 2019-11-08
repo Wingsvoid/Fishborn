@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:Fishborn"
         mc:Ignorable="d"
         Title="Fishborn" Height="450" Width="800" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+      
+    </Window.Resources>
+
     <Window.Background>
         <ImageBrush ImageSource="Image/seabottom2.png"/>
     </Window.Background>
@@ -19,7 +23,15 @@
             <Canvas.Background>
                 <ImageBrush ImageSource="Image/Fishlist.png"/>
             </Canvas.Background>
-            <ListBox x:Name="ListAllFish" Height="377" Canvas.Left="10" Canvas.Top="10" Width="191" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF8AC9EE"/>
+
+            <ListBox x:Name="ListAllFish" Height="377" Canvas.Left="10" Canvas.Top="10" Width="191" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF8AC9EE" Style="{DynamicResource ListBoxStyle1}">
+                <ListBox.Resources>
+                    <Style x:Key="ListBoxStyle1" TargetType="{x:Type ListBox}">
+                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+                    </Style>                    
+                </ListBox.Resources>
+            </ListBox>
 
         </Canvas>
         <Canvas x:Name="Scrollbar" HorizontalAlignment="Left" Height="397" Margin="517,10,0,0" VerticalAlignment="Top" Width="256" Grid.Column="1">
