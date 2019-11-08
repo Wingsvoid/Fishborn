@@ -14,18 +14,21 @@ namespace Fishborn
         private double fieldSizeY;
         private double gameSpeed;
         private int stageCount;
-        private int fishNumber;
         private int survCount;
+        private int stageId;
         public List<Fish> Fishes;
         public List<Plant> Plants;
         private List<Generation> generations;
         private Random random;
         private double stageTime;
         private double maxStageTime;
+        private bool isProgress;
+        public int NowStage { get => stageId; }
         public double StageTime { get => stageTime; }
         public double MaxStageTime { get => maxStageTime; }
         public double SurviversCount { get => survCount; }
-        public Simulation(double _fieldSizeX, double _fieldSizeY,int _survCount, int _stageCount,  double _maxStageTime, double _gameSpeed, int _fishNumber)
+        public bool IsProgress { get => isProgress; }
+        public Simulation(double _fieldSizeX, double _fieldSizeY,int _survCount, int _stageCount,  double _maxStageTime, double _gameSpeed)
         {
             random = new Random();
             generations = new List<Generation>();
@@ -33,19 +36,30 @@ namespace Fishborn
             fieldSizeX = _fieldSizeX;
             fieldSizeY = _fieldSizeY;
             gameSpeed = _gameSpeed;
-            fishNumber = _fishNumber;
             maxStageTime = _maxStageTime*60*1000;
             stageCount = _stageCount;
             survCount = _survCount;
-            CreateRandomGeneration();
-            Fishes = generations[0].Fishes;
+            CreateNewGeneration();
             stageTime = 0;
-            
+            stageId = 0;
+            isProgress = true;
         }
         public void Update(double time)
         {
             time *= gameSpeed;
             stageTime += time;
+            if (stageTime >= maxStageTime)
+            {
+                stageTime = 0;
+                stageId++;
+                if (stageId == stageCount)
+                {
+                    isProgress = false;
+                    return;
+                }
+                Plants.Clear();
+                CreateNewGeneration();
+            }
             if (stageTime/2000 >= Plants.Count)
             {
                 CreatePlant();
@@ -105,24 +119,20 @@ namespace Fishborn
             double length = Math.Sqrt(Math.Pow(distVector.X, 2)+Math.Pow(distVector.Y, 2));
             return length;
         }
-        private void CreateRandomGeneration()
+        private void CreateNewGeneration()
         {
-            Generation generation;
-            if (generations == null)
-                generation = new Generation(0);
+            Generation nextGen;
+            if (generations.Count == 0)
+                nextGen = new Generation();
             else
-                generation = new Generation(generations.Count);
-            for (int i=0; i<fishNumber; i++)
+                nextGen = new Generation(generations[generations.Count - 1]);
+            foreach(Fish fish in nextGen.Fishes.Where(f => f.GenId==nextGen.Id))
             {
-                double speed = random.Next(10, 100);
-                double visibility = random.Next(10, 100);
-                double hungertime = random.Next(10, 100);
-                double summ = speed + visibility + hungertime;
-                Fish fish = new Fish(generation.Id, generation.Id + i, speed/summ, visibility/summ, hungertime/summ, RandomPoint());
+                fish.SetPosition(RandomPoint());
                 fish.SetDestination(RandomPoint());
-                generation.SetFish(fish);
             }
-            generations.Add(generation);           
+            Fishes = nextGen.Fishes;
+            generations.Add(nextGen);       
         }
 
         private void CreatePlant()
@@ -130,7 +140,7 @@ namespace Fishborn
             Plant plant = new Plant(Plants.Count, RandomPoint());
             Plants.Add(plant);
         }
-        private Point RandomPoint()
+        public Point RandomPoint()
         {
             Point newPoint = new Point(random.Next(0, (int)fieldSizeX), random.Next(0, (int)fieldSizeY));
             return newPoint;

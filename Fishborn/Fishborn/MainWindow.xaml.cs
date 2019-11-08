@@ -40,7 +40,7 @@ namespace Fishborn
         //DateTime timeEnd;
         bool isStarted;
         bool isPaused;
-
+        int currentStage;
         List<Fish> listboxSource;
 
 
@@ -91,53 +91,9 @@ namespace Fishborn
 
         private void start_Click(object sender, RoutedEventArgs e)
         {
-
-            simulation = new Simulation(Field.Width, Field.Height, (int)Survivor.Value, (int)CountStage.Value,TimeStage.Value,SpeedSim.Value, 12);
-            rectangles = new List<Rectangle>();
-            rectPlants = new List<Rectangle>();
-            grids = new List<Grid>();
-            textBlocks = new List<TextBlock>();
-            listboxSource = simulation.Fishes;
-
-            foreach (Fish fish in simulation.Fishes)
-            {
-                Grid grid = new Grid();
-                Rectangle rect = new Rectangle();
-                TextBlock text = new TextBlock();
-                rect.Height = 16;
-                rect.Width = 32;
-
-                if (fish.SpeedMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
-                {
-                    rect.Fill = ib_RedFish;
-                }
-
-                if (fish.VisibilityMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
-                {
-                    rect.Fill = ib_GreenFish;
-                }
-
-                if (fish.Hunger_timeMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
-                {
-                    rect.Fill = ib_YellowFish;
-                }
-
-                if (start.IsEnabled == true)
-                {
-                    start.IsEnabled = false;
-                }
-                text.Text = fish.ShortInfo();
-                text.FontSize = 10;
-                textBlocks.Add(text);
-                rectangles.Add(rect);
-                grid.Children.Add(text);
-                grid.Children.Add(rect);
-                
-                grids.Add(grid);
-                Field.Children.Add(grid);
-                grid.RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y-8);
-            }
-
+            simulation = new Simulation(Field.Width, Field.Height, (int)Survivor.Value, (int)CountStage.Value,TimeStage.Value,SpeedSim.Value);
+            NewStage();
+            currentStage = 0;
             dispatcherTimer.Start();
             timeStart = DateTime.Now;
             timePrev = timeStart;
@@ -148,22 +104,41 @@ namespace Fishborn
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
+            if (!simulation.IsProgress)
+            {
+                dispatcherTimer.Stop();
+                return;
+            }
             timeNext = DateTime.Now;
             double time = (timeNext - timePrev).TotalMilliseconds;
+            if (simulation.NowStage!=currentStage)
+                NewStage();
+            UpdateScreen();                      
+            timePrev = timeNext;
+            UpdateListBox();
             simulation.Update(time);
-            if (simulation.Plants.Count > rectPlants.Count)
-            {
-                Rectangle rect = new Rectangle();
-                rect.Height = 16;
-                rect.Width = 32;
-                rect.Fill = ib_Plant;
-                rectPlants.Add(rect);
-                Field.Children.Add(rect);
-                rect.RenderTransform = new TranslateTransform(simulation.Plants[rectPlants.Count - 1].Pos.X, simulation.Plants[rectPlants.Count - 1].Pos.Y);
-            }
+        }
+
+        private void NewStage()
+        {
+            Field.Children.Clear();
+            currentStage = simulation.NowStage;
+            rectangles = new List<Rectangle>();
+            rectPlants = new List<Rectangle>();
+            grids = new List<Grid>();
+            textBlocks = new List<TextBlock>();
+            listboxSource = simulation.Fishes;
+
             foreach (Fish fish in simulation.Fishes)
             {
-                Brush image = rectangles[fish.Id].Fill.Clone();
+                DrawFish(fish);
+            }
+        }
+        private void UpdateScreen()
+        {
+            foreach (Fish fish in simulation.Fishes)
+            {
+                Brush image = rectangles[fish.Id%12].Fill.Clone();
                 if (fish.Direction.X <= 0)
                 {
                     image.RelativeTransform = new ScaleTransform(1, 1, 0.5, 0.5);
@@ -176,25 +151,68 @@ namespace Fishborn
                 {
                     image.RelativeTransform = new ScaleTransform(1, -1, 0.5, 0.5);
                 }
-                rectangles[fish.Id].Fill = image;
+                rectangles[fish.Id%12].Fill = image;
 
-
-
-                grids[fish.Id].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y-8);
-                textBlocks[fish.Id].Text = fish.ShortInfo();
+                grids[fish.Id%12].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y - 8);
+                textBlocks[fish.Id%12].Text = fish.ShortInfo();
             }
             foreach (Plant plant in simulation.Plants)
             {
                 if (!plant.isActive)
                     rectPlants[plant.Id].Visibility = Visibility.Collapsed;
             }
-
-            timePrev = timeNext;
-            UpdateListBox();
-            if ((simulation.StageTime>=simulation.MaxStageTime)||(simulation.Fishes.FindAll(x => x.isAlive).Count == simulation.SurviversCount))
+            if (simulation.Plants.Count > rectPlants.Count)
             {
-                dispatcherTimer.Stop();
+                DrawPlant(simulation.Plants[simulation.Plants.Count - 1]);
             }
+        }
+        private void DrawFish(Fish fish)
+        {
+            Grid grid = new Grid();
+            Rectangle rect = new Rectangle();
+            TextBlock text = new TextBlock();
+            rect.Height = 16;
+            rect.Width = 32;
+
+            if (fish.SpeedMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
+            {
+                rect.Fill = ib_RedFish;
+            }
+
+            if (fish.VisibilityMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
+            {
+                rect.Fill = ib_GreenFish;
+            }
+
+            if (fish.Hunger_timeMod == Math.Max(fish.SpeedMod, Math.Max(fish.VisibilityMod, fish.Hunger_timeMod)))
+            {
+                rect.Fill = ib_YellowFish;
+            }
+
+            if (start.IsEnabled == true)
+            {
+                start.IsEnabled = false;
+            }
+            text.Text = fish.ShortInfo();
+            text.FontSize = 10;
+            textBlocks.Add(text);
+            rectangles.Add(rect);
+            grid.Children.Add(text);
+            grid.Children.Add(rect);
+
+            grids.Add(grid);
+            Field.Children.Add(grid);
+            grid.RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y - 8);
+        }
+        private void DrawPlant(Plant _plant)
+        {
+            Rectangle rect = new Rectangle();
+            rect.Height = 16;
+            rect.Width = 32;
+            rect.Fill = ib_Plant;
+            rectPlants.Add(rect);
+            Field.Children.Add(rect);
+            rect.RenderTransform = new TranslateTransform(_plant.Pos.X, _plant.Pos.Y);
         }
         private void UpdateListBox()
         {
