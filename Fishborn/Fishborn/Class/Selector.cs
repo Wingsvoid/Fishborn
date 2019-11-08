@@ -12,19 +12,21 @@ namespace Fishborn.Class
         private List<Fish> fishes;
         private int pairsCount;
         private bool isDebug;
+        private Random rand;
         public Selector(List<Fish> fishes, bool debug)
         {
             this.fishes = fishes;
             this.isDebug = debug;
+            rand = new Random();
         }
         public List<List<Fish>> GetPairs(int count)
         {
             pairs = new List<List<Fish>>();
             for (int i = 0; i < count; i++)
             {
-                Fish parent1 = GetRandomFishByChance(CalculateRating(fishes));
+                Fish parent1 = GetRandomFishFromRating(CalculateRating(fishes));
                 var temp = fishes.Where(x => !x.Equals(parent1)).ToList();
-                Fish parent2 = GetRandomFishByChance(CalculateRating(temp));
+                Fish parent2 = GetRandomFishFromRating(CalculateRating(temp));
                 List<Fish> pair = new List<Fish>();
                 pair.Add(parent1);
                 pair.Add(parent2);
@@ -63,11 +65,11 @@ namespace Fishborn.Class
             return rating;
         }
 
-        private Fish GetRandomFishByChance(Dictionary<Fish, double> rating)
+        private Fish GetRandomFishFromRating(Dictionary<Fish, double> rating)
         {
-            Random rand = new Random();
             List<double> probs = new List<double>();
             double total = 0;
+            double checkedArea = 0;
             for (int i = 0; i < rating.Count; i++)
             {
                 probs.Add(rating.ElementAt(i).Value);
@@ -76,21 +78,19 @@ namespace Fishborn.Class
 
             int index = probs.Count - 1;
 
-            double RandomPoint = rand.NextDouble() * total;
+            double randPoint = rand.NextDouble() * total;
 
             for (int i = 0; i < probs.Count; i++)
             {
-                if (RandomPoint < probs[i])
+                checkedArea += probs[i];
+                if (randPoint < checkedArea)
                 {
                     index = i;
                     break;
-
                 }
-                else
-                    RandomPoint -= probs[i];
             }
-
             return rating.ElementAt(index).Key;
         }
+
     }
 }
