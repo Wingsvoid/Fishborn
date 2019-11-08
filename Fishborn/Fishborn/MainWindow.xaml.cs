@@ -99,6 +99,11 @@ namespace Fishborn
             timePrev = timeStart;
             isStarted = true;
             isPaused = false;
+            start.IsEnabled = false;
+            Survivor.IsEnabled = false;
+            CountStage.IsEnabled = false;
+            TimeStage.IsEnabled = false;
+            SpeedSim.IsEnabled = false;
         }
 
 
@@ -225,13 +230,16 @@ namespace Fishborn
         }
         private void restart_Click(object sender, RoutedEventArgs e)
         {
-            if (restart.IsEnabled == true)
-            {
-                Field.Children.Clear();
-                start.IsEnabled = true;
-                dispatcherTimer.Stop();
-                isPaused = true;
-            }
+            Field.Children.Clear();
+            start.IsEnabled = true;
+            dispatcherTimer.Stop();
+            isPaused = true;
+            Survivor.IsEnabled = true;
+            CountStage.IsEnabled = true;
+            TimeStage.IsEnabled = true;
+            SpeedSim.IsEnabled = true;
+            ListAllFish.Items.Clear();
+
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
@@ -269,6 +277,54 @@ namespace Fishborn
                     break;
             }
 
+        }
+
+        private void Survivor_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            try
+            {
+                SurvivorLabCenter.Content = Survivor.Value.ToString();
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+        }
+
+        private void CountStage_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            try
+            {
+                CountStageCenter.Content = CountStage.Value.ToString();
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+        }
+
+        private void TimeStage_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            try
+            {
+                TimeStageCenter.Content = TimeStage.Value.ToString();
+            }
+            catch (NullReferenceException)
+            {
+
+            }
+        }
+
+        private void SpeedSim_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            try
+            {
+                SpeedSimCenter.Content = SpeedSim.Value.ToString();
+            }
+            catch (NullReferenceException)
+            {
+
+            }
         }
     }
 }
