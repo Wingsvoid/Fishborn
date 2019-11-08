@@ -12,16 +12,20 @@ namespace Fishborn
     {
         private double fieldSizeX;
         private double fieldSizeY;
-        private int gameSpeed;
+        private double gameSpeed;
+        private int stageCount;
         private int fishNumber;
+        private int survCount;
         public List<Fish> Fishes;
         public List<Plant> Plants;
         private List<Generation> generations;
         private Random random;
         private double stageTime;
+        private double maxStageTime;
         public double StageTime { get => stageTime; }
-
-        public Simulation(double _fieldSizeX, double _fieldSizeY, int _gameSpeed, int _fishNumber)
+        public double MaxStageTime { get => maxStageTime; }
+        public double SurviversCount { get => survCount; }
+        public Simulation(double _fieldSizeX, double _fieldSizeY,int _survCount, int _stageCount,  double _maxStageTime, double _gameSpeed, int _fishNumber)
         {
             random = new Random();
             generations = new List<Generation>();
@@ -30,6 +34,9 @@ namespace Fishborn
             fieldSizeY = _fieldSizeY;
             gameSpeed = _gameSpeed;
             fishNumber = _fishNumber;
+            maxStageTime = _maxStageTime*60*1000;
+            stageCount = _stageCount;
+            survCount = _survCount;
             CreateRandomGeneration();
             Fishes = generations[0].Fishes;
             stageTime = 0;
@@ -65,12 +72,12 @@ namespace Fishborn
                             }
                         }
                     }
-                    FishMovement(fish, fish.Speed * gameSpeed * (time / 1000) * 10);
+                    FishMovement(fish, fish.Speed * (time / 1000) * 10);
                 }
                 else
                 {
                     fish.SetDestination(new Point(fish.Pos.X, 0));
-                    FishMovement(fish, 5 * gameSpeed * (time / 1000) * 10);
+                    FishMovement(fish, 5 * (time / 1000) * 10);
                     
                 }
             }

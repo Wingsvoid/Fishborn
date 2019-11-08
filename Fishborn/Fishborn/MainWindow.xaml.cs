@@ -92,7 +92,7 @@ namespace Fishborn
         private void start_Click(object sender, RoutedEventArgs e)
         {
 
-            simulation = new Simulation(Field.Width, Field.Height, 5, 12);
+            simulation = new Simulation(Field.Width, Field.Height, (int)Survivor.Value, (int)CountStage.Value,TimeStage.Value,SpeedSim.Value, 12);
             rectangles = new List<Rectangle>();
             rectPlants = new List<Rectangle>();
             grids = new List<Grid>();
@@ -191,6 +191,10 @@ namespace Fishborn
 
             timePrev = timeNext;
             UpdateListBox();
+            if ((simulation.StageTime>=simulation.MaxStageTime)||(simulation.Fishes.FindAll(x => x.isAlive).Count == simulation.SurviversCount))
+            {
+                dispatcherTimer.Stop();
+            }
         }
         private void UpdateListBox()
         {
