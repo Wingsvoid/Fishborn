@@ -8,5 +8,15 @@ namespace Fishborn.Class
 {
     class Cross
     {
+        public Cross()
+        {
+
+        }
+        public Fish GiveBirth(Fish parent1, Fish parent2)
+        {
+            Fish children = null;
+            return children;
+        }
+
     }
 }

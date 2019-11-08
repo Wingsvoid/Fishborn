@@ -22,10 +22,10 @@ namespace Fishborn
     {
         Simulation simulation;
 
-        List<Rectangle> rectangles;
-        List<Grid> grids;
-        List<Rectangle> rectPlants;
-        List<TextBlock> textBlocks;
+        Dictionary<Fish, Rectangle> rectangles;
+        Dictionary<Fish, Grid> grids;
+        Dictionary<Plant, Rectangle> rectPlants;
+        Dictionary<Fish, TextBlock> textBlocks;
 
         //кисти
         ImageBrush ib_RedFish;
@@ -128,10 +128,10 @@ namespace Fishborn
         {
             Field.Children.Clear();
             currentStage = simulation.NowStage;
-            rectangles = new List<Rectangle>();
-            rectPlants = new List<Rectangle>();
-            grids = new List<Grid>();
-            textBlocks = new List<TextBlock>();
+            rectangles = new Dictionary<Fish, Rectangle>();
+            rectPlants = new Dictionary<Plant, Rectangle>();
+            grids = new Dictionary<Fish, Grid>();
+            textBlocks = new Dictionary<Fish, TextBlock>();
             listboxSource = simulation.Fishes;
 
             foreach (Fish fish in simulation.Fishes)
@@ -143,7 +143,7 @@ namespace Fishborn
         {
             foreach (Fish fish in simulation.Fishes)
             {
-                Brush image = rectangles[fish.Id%12].Fill.Clone();
+                Brush image = rectangles[fish].Fill.Clone();
                 if (fish.Direction.X <= 0)
                 {
                     image.RelativeTransform = new ScaleTransform(1, 1, 0.5, 0.5);
@@ -156,15 +156,15 @@ namespace Fishborn
                 {
                     image.RelativeTransform = new ScaleTransform(1, -1, 0.5, 0.5);
                 }
-                rectangles[fish.Id%12].Fill = image;
+                rectangles[fish].Fill = image;
 
-                grids[fish.Id%12].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y - 8);
-                textBlocks[fish.Id%12].Text = fish.ShortInfo();
+                grids[fish].RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y - 8);
+                textBlocks[fish].Text = fish.ShortInfo();
             }
             foreach (Plant plant in simulation.Plants)
             {
                 if (!plant.isActive)
-                    rectPlants[plant.Id].Visibility = Visibility.Collapsed;
+                    rectPlants[plant].Visibility = Visibility.Collapsed;
             }
             if (simulation.Plants.Count > rectPlants.Count)
             {
@@ -200,12 +200,12 @@ namespace Fishborn
             }
             text.Text = fish.ShortInfo();
             text.FontSize = 10;
-            textBlocks.Add(text);
-            rectangles.Add(rect);
+            textBlocks.Add(fish, text);
+            rectangles.Add(fish, rect);
             grid.Children.Add(text);
             grid.Children.Add(rect);
 
-            grids.Add(grid);
+            grids.Add(fish, grid);
             Field.Children.Add(grid);
             grid.RenderTransform = new TranslateTransform(fish.Pos.X, fish.Pos.Y - 8);
         }
@@ -215,7 +215,7 @@ namespace Fishborn
             rect.Height = 16;
             rect.Width = 32;
             rect.Fill = ib_Plant;
-            rectPlants.Add(rect);
+            rectPlants.Add(_plant, rect);
             Field.Children.Add(rect);
             rect.RenderTransform = new TranslateTransform(_plant.Pos.X, _plant.Pos.Y);
         }

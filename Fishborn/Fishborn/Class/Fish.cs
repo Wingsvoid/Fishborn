@@ -25,7 +25,7 @@ namespace Fishborn
         private double lifetime;
         private bool alive;
         
-        public bool IsAltruistic {get => IsAltruistic; }
+        public bool IsAltruistic {get => isAltruistic; }
         public int Id { get => id; }
         public int GenId { get => genId; }
         public double Speed { get => speed; }

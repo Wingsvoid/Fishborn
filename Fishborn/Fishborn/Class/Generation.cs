@@ -14,35 +14,53 @@ namespace Fishborn.Class
         public int Id { get => id; }
         public Generation ()
         {
-            System.Random rand = new Random();
+            
             Fishes = new List<Fish>();
             id = 0;
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 10; i++)
             {
-                double speed = rand.Next(10, 100);
-                double visibility = rand.Next(10, 100);
-                double hungertime = rand.Next(10, 100);
-                double summ = speed + visibility + hungertime;
-                Fish fish = new Fish(id, id*12 + i, speed / summ, visibility / summ, hungertime / summ, new Point(0, 0));
-                fish.SetDestination(new Point(0, 0));
-                this.Fishes.Add(fish);
+                Fishes.Add(NewFish(i));
             }
         }
         public Generation(Generation ancestors)
         {
-            System.Random rand = new Random();
-            Fishes = new List<Fish>();
             id = ancestors.Id + 1;
-            for (int i = 0; i < 12; i++)
+            Fishes = new List<Fish>();
+            Selector selector = new Selector(ancestors.Fishes);
+            Cross cross = new Cross();
+            Dictionary<Fish, Fish> parents;
+            List<Fish> survivers = new List<Fish>();
+            List<Fish> childrens = new List<Fish>();
+
+
+            foreach (Fish fish in ancestors.Fishes.Where(x => x.isAlive))
+                    survivers.Add(fish);
+            parents = selector.GetPairs(10 - survivers.Count);
+
+            //foreach (KeyValuePair<Fish, Fish> pair in parents)
+            //{
+            //    childrens.Add(cross.GiveBirth(pair.Key, pair.Value));
+            //}
+            for (int i = 0; i < 10 - survivers.Count; i++)
             {
-                double speed = rand.Next(10, 100);
-                double visibility = rand.Next(10, 100);
-                double hungertime = rand.Next(10, 100);
-                double summ = speed + visibility + hungertime;
-                Fish fish = new Fish(id, id * 12 + i, speed / summ, visibility / summ, hungertime / summ, new Point(0, 0));
-                fish.SetDestination(new Point(0, 0));
-                this.Fishes.Add(fish);
+                childrens.Add(NewFish(i));
             }
+
+            Fishes.AddRange(survivers);
+            Fishes.AddRange(childrens);
+
+
+        }
+        private Fish NewFish(int i)
+        {
+            System.Random rand = new Random(i);
+            double speed = rand.Next(10, 100);
+            double visibility = rand.Next(10, 100);
+            double hungertime = rand.Next(10, 100);
+            double summ = speed + visibility + hungertime;
+            Fish fish = new Fish(id, id * 10 + i, speed / summ, visibility / summ, hungertime / summ, new Point(0, 0));
+            fish.SetDestination(new Point(0, 0));
+            return fish;
         }
 
 

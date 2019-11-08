@@ -48,7 +48,7 @@ namespace Fishborn
         {
             time *= gameSpeed;
             stageTime += time;
-            if (stageTime >= maxStageTime)
+            if ((stageTime >= maxStageTime) || (Fishes.FindAll(x => x.isAlive).Count <=survCount))
             {
                 stageTime = 0;
                 stageId++;
