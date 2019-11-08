@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Fishborn" Height="450" Width="800" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-      
+
     </Window.Resources>
 
     <Window.Background>
@@ -24,12 +24,12 @@
                 <ImageBrush ImageSource="Image/Fishlist.png"/>
             </Canvas.Background>
 
-            <ListBox x:Name="ListAllFish" Height="377" Canvas.Left="10" Canvas.Top="10" Width="191" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF8AC9EE" Style="{DynamicResource ListBoxStyle1}">
+            <ListBox x:Name="ListAllFish" Height="377" Canvas.Left="15" Canvas.Top="10" Width="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF8AC9EE" Style="{DynamicResource ListBoxStyle1}">
                 <ListBox.Resources>
                     <Style x:Key="ListBoxStyle1" TargetType="{x:Type ListBox}">
                         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
                         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
-                    </Style>                    
+                    </Style>
                 </ListBox.Resources>
             </ListBox>
 
@@ -38,14 +38,26 @@
             <Canvas.Background>
                 <ImageBrush ImageSource="Image/Scrollbar.png"/>
             </Canvas.Background>
-            <Slider x:Name="Survivor" Canvas.Left="124" Canvas.Top="30" Width="122" Minimum="1" SmallChange="1" AutoToolTipPlacement="BottomRight"/>
-            <Slider x:Name="CountStage" Canvas.Left="124" Canvas.Top="105" Width="122" Minimum="1" Maximum="20" SmallChange="1" AutoToolTipPlacement="BottomRight"/>
-            <Slider x:Name="TimeStage" Canvas.Left="124" Canvas.Top="180" Width="122" Minimum="1" Maximum="5" LargeChange="0.5" TickFrequency="0.5" SmallChange="0.5" AutoToolTipPlacement="BottomRight"/>
-            <Slider x:Name="SpeedSim" Canvas.Left="124" Canvas.Top="255" Width="122" Minimum="0.2" Maximum="5" LargeChange="0.2" TickFrequency="0.2" SmallChange="0.2" AutoToolTipPlacement="BottomRight"/>
+            <Slider x:Name="Survivor" Canvas.Left="124" Canvas.Top="30" Width="122" Minimum="1" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="Survivor_ValueChanged"/>
+            <Slider x:Name="CountStage" Canvas.Left="124" Canvas.Top="105" Width="122" Minimum="1" Maximum="20" SmallChange="1" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="CountStage_ValueChanged"/>
+            <Slider x:Name="TimeStage" Canvas.Left="124" Canvas.Top="180" Width="122" Minimum="1" Maximum="5" LargeChange="0.5" TickFrequency="0.5" SmallChange="0.5" IsSnapToTickEnabled="True" ValueChanged="TimeStage_ValueChanged"/>
+            <Slider x:Name="SpeedSim" Canvas.Left="124" Canvas.Top="255" Width="122" Minimum="0.5" Maximum="5" LargeChange="0.5" TickFrequency="0.5" SmallChange="0.2" IsSnapToTickEnabled="True" ValueChanged="SpeedSim_ValueChanged"/>
             <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Доля выживших" Canvas.Top="16" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Margin="0" Padding="20,5,0,0" FontSize="14" Foreground="#FF8AC9EE" FontWeight="Bold"/>
             <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Количество этапов" Canvas.Top="91" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Padding="20,5,0,0" TextDecorations="{x:Null}" FontSize="14" Foreground="#FF8AC9EE" FontWeight="Bold"/>
             <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Время этапа" Canvas.Top="160" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Padding="20,20,0,0" FontSize="14" Foreground="#FF8AC9EE" FontWeight="Bold"/>
             <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Скорость симуляции" Canvas.Top="243" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Padding="20,5,0,0" FontSize="14" Foreground="#FF8AC9EE" FontWeight="Bold"/>
+            <Label x:Name="SurvivorLab1" Content="1" Height="26" Canvas.Left="120" Canvas.Top="48" Width="28" Foreground="#FF8ABCC7" FontSize="10"/>
+            <Label x:Name="SurvivorLab2" Content="10" Height="26" Canvas.Left="218" Canvas.Top="48" Width="28" Foreground="#FF8ABCC7" FontSize="10"/>
+            <Label x:Name="CountStageLab1" Content="1" Height="26" Canvas.Left="119" Canvas.Top="123" Width="28" Foreground="#FF8AC9EE" FontSize="10"/>
+            <Label x:Name="CountStageLab2" Content="20" Height="26" Canvas.Left="218" Canvas.Top="123" Width="28" Foreground="#FF8ABCC7" FontSize="10"/>
+            <Label x:Name="TimeStageLab1" Content="1" Height="26" Canvas.Left="119" Canvas.Top="198" Width="28" Foreground="#FF8AC9EE" FontSize="10"/>
+            <Label x:Name="TimeStageLab2" Content="5" Height="26" Canvas.Left="218" Canvas.Top="198" Width="28" Foreground="#FF8ABCC7" FontSize="10"/>
+            <Label x:Name="SpeedSimLab1" Content="0.5" Height="26" Canvas.Left="119" Canvas.Top="273" Width="28" Foreground="#FF8AC9EE" FontSize="10"/>
+            <Label x:Name="SpeedSimLab2" Content="5&#xD;&#xA;" Height="26" Canvas.Left="218" Canvas.Top="273" Width="28" Foreground="#FF8ABCC7" FontSize="10"/>
+            <Label x:Name="SurvivorLabCenter" Content="1" Height="26" Canvas.Left="173" Canvas.Top="48" Width="28" Foreground="White" FontSize="10"/>
+            <Label x:Name="TimeStageCenter" Content="1" Height="26" Canvas.Left="173" Canvas.Top="198" Width="28" Foreground="White" FontSize="10"/>
+            <Label x:Name="CountStageCenter" Content="1" Height="26" Canvas.Left="173" Canvas.Top="123" Width="28" Foreground="White" FontSize="10"/>
+            <Label x:Name="SpeedSimCenter" Content="0.5" Height="26" Canvas.Left="173" Canvas.Top="273" Width="28" Foreground="White" FontSize="10"/>
 
         </Canvas>
         <Button x:Name="restart" Content="Рестарт" HorizontalAlignment="Left" Height="28" Margin="517,412,0,0" VerticalAlignment="Top" Width="121" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="restart_Click" Grid.Column="1" BorderBrush="{x:Null}">
