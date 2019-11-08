@@ -12,6 +12,7 @@ namespace Fishborn
         private Point position;
         private Point destination;
         private Vector direction;
+        private bool isAltruistic;
         private int id;
         private int genId;
         private double speed;
@@ -24,12 +25,12 @@ namespace Fishborn
         private double lifetime;
         private bool alive;
         
-
+        public bool IsAltruistic {get => IsAltruistic; }
         public int Id { get => id; }
         public int GenId { get => genId; }
         public double Speed { get => speed; }
         public double SpeedMod { get => speedMod; }
-        public double Visibility { get => visibility; }
+        public double Visibility { get => isAltruistic ? AltVisibility() : visibility; }
         public double VisibilityMod { get => visibilityMod; }
         public double Hunger_time { get => hungertime;}
         public double Hunger_timeMod { get => hungertimeMod; }
@@ -53,6 +54,7 @@ namespace Fishborn
             starvingtime = 0;
             lifetime = 0;
             alive = true;
+            isAltruistic = AltruistRandom((int)visibility);
         }
         public void UpTime(double time)
         {
@@ -66,6 +68,7 @@ namespace Fishborn
         public void EatPlant()
         {
             starvingtime = 0;
+            alive = true;
         }
         public void MoveOffset(double x, double y)
         {
@@ -85,18 +88,29 @@ namespace Fishborn
             alive = false;
             SetDestination(new Point(Pos.X, 0));
         }
+        private double AltVisibility()
+        {
+            double altruisticModifier = starvingtime / (hungertime* 0.5);
+            double altruisticVis = visibility * altruisticModifier;
+            return altruisticModifier < 1 ? altruisticVis : visibility;
+        }
 
         public String ShortInfo()
         {
-            string shortInfo ="\n" + "\n" + Id + ", " + Math.Round(Hunger_time - StarvingTime);
+            string shortInfo ="\n" + "\n" + (isAltruistic ? "A, " : "E, ") +Id + ", " + Math.Round(Hunger_time - StarvingTime);
             return shortInfo;
         }
         public String Info()
         {
-            string info = "genId: " + genId + " Id: " + id + "\n" + " Spd: " + Math.Round(speed, 1) +
-                " Vis: " + Math.Round(visibility, 1) + "\n" +  " HTime: " + Math.Round(hungertime, 1) + 
+            string info = (isAltruistic? "Alt, " : "Ego, ") + "genId: " + genId + " Id: " + id + "\n" + " Spd: " + Math.Round(speed, 1) +
+                " Vis: " + Math.Round(Visibility, 1)+ "(" +  Math.Round(visibility, 1) + ")"+ "\n" +  " HTime: " + Math.Round(hungertime, 1) + 
                 " LTime: " + Math.Round(lifetime, 1) + "\n" + " isAlive: " + alive;
             return info;
+        }
+        private bool AltruistRandom(int seed)
+        {
+            System.Random rand = new Random(seed);
+            return rand.Next()%2 == 1 ? true : false;
         }
     }
 }
