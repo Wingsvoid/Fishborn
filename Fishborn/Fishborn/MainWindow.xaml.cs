@@ -92,7 +92,7 @@ namespace Fishborn
         private void start_Click(object sender, RoutedEventArgs e)
         {
 
-            simulation = new Simulation(Field.Width, Field.Height, 1, 12);
+            simulation = new Simulation(Field.Width, Field.Height, 5, 12);
             rectangles = new List<Rectangle>();
             rectPlants = new List<Rectangle>();
             grids = new List<Grid>();

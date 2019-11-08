@@ -37,6 +37,7 @@ namespace Fishborn
         }
         public void Update(double time)
         {
+            time *= gameSpeed;
             stageTime += time;
             if (stageTime/2000 >= Plants.Count)
             {
@@ -49,10 +50,10 @@ namespace Fishborn
                     fish.UpTime(time);
                     foreach (Plant plant in Plants)
                     {
-                        double distanceToPlant = CalculateLength(new Vector(plant.Pos.X - fish.Pos.X, plant.Pos.Y - fish.Pos.Y));
-                        if (distanceToPlant <= fish.Visibility && distanceToPlant <= CalculateLength(fish.Direction))
+                        if (plant.isActive)
                         {
-                            if (plant.isActive)
+                            double distanceToPlant = CalculateLength(new Vector(plant.Pos.X - fish.Pos.X, plant.Pos.Y - fish.Pos.Y));
+                            if (distanceToPlant <= fish.Visibility && distanceToPlant <= CalculateLength(fish.Direction))
                             {
                                 fish.SetDestination(plant.Pos);
                                 if (distanceToPlant == 0)
@@ -61,7 +62,7 @@ namespace Fishborn
                                     plant.Disable();
                                     fish.SetDestination(RandomPoint());
                                 }
-                            }                                
+                            }
                         }
                     }
                     FishMovement(fish, fish.Speed * gameSpeed * (time / 1000) * 10);
