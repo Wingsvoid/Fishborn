@@ -15,28 +15,28 @@
             <ColumnDefinition Width="784*"/>
         </Grid.ColumnDefinitions>
         <Canvas x:Name="Field" HorizontalAlignment="Left" Height="397" Margin="10,10,0,0" VerticalAlignment="Top" Width="302" Grid.ColumnSpan="2"/>
-        <Canvas x:Name="Fishlist" HorizontalAlignment="Left" Height="397" Margin="301,10,0,0" VerticalAlignment="Top" Width="183" Grid.Column="1">
+        <Canvas x:Name="Fishlist" HorizontalAlignment="Left" Height="397" Margin="301,10,0,0" VerticalAlignment="Top" Width="211" Grid.Column="1">
             <Canvas.Background>
                 <ImageBrush ImageSource="Image/Fishlist.png"/>
             </Canvas.Background>
-            <ListBox x:Name="ListAllFish" Height="377" Canvas.Left="10" Canvas.Top="10" Width="163" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF8AC9EE"/>
+            <ListBox x:Name="ListAllFish" Height="377" Canvas.Left="10" Canvas.Top="10" Width="191" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF8AC9EE"/>
 
         </Canvas>
-        <Canvas x:Name="Scrollbar" HorizontalAlignment="Left" Height="397" Margin="489,10,0,0" VerticalAlignment="Top" Width="284" Grid.Column="1">
+        <Canvas x:Name="Scrollbar" HorizontalAlignment="Left" Height="397" Margin="517,10,0,0" VerticalAlignment="Top" Width="256" Grid.Column="1">
             <Canvas.Background>
                 <ImageBrush ImageSource="Image/Scrollbar.png"/>
             </Canvas.Background>
-            <Slider Canvas.Left="124" Canvas.Top="30" Width="154"/>
-            <Slider Canvas.Left="124" Canvas.Top="105" Width="154"/>
-            <Slider Canvas.Left="124" Canvas.Top="180" Width="154"/>
-            <Slider Canvas.Left="124" Canvas.Top="255" Width="154"/>
+            <Slider x:Name="Survivor" Canvas.Left="124" Canvas.Top="30" Width="122" Minimum="1"/>
+            <Slider x:Name="CountStage" Canvas.Left="124" Canvas.Top="105" Width="122" Minimum="1" Maximum="20"/>
+            <Slider x:Name="TimeStage" Canvas.Left="124" Canvas.Top="180" Width="122" Minimum="1" Maximum="5" LargeChange="0.5"/>
+            <Slider x:Name="SpeedSim" Canvas.Left="124" Canvas.Top="255" Width="122" Minimum="0.2" Maximum="5" LargeChange="0.2"/>
             <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Доля выживших" Canvas.Top="16" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Margin="0" Padding="20,5,0,0" FontSize="14" Foreground="#FF8AC9EE" FontWeight="Bold"/>
             <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Количество этапов" Canvas.Top="91" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Padding="20,5,0,0" TextDecorations="{x:Null}" FontSize="14" Foreground="#FF8AC9EE" FontWeight="Bold"/>
             <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Время этапа" Canvas.Top="160" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Padding="20,20,0,0" FontSize="14" Foreground="#FF8AC9EE" FontWeight="Bold"/>
             <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Скорость симуляции" Canvas.Top="243" Height="38" RenderTransformOrigin="0.548,0.361" Width="109" FontFamily="Times New Roman" Padding="20,5,0,0" FontSize="14" Foreground="#FF8AC9EE" FontWeight="Bold"/>
 
         </Canvas>
-        <Button x:Name="restart" Content="Рестарт" HorizontalAlignment="Left" Height="28" Margin="488.5,412,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="restart_Click" Grid.Column="1" BorderBrush="{x:Null}">
+        <Button x:Name="restart" Content="Рестарт" HorizontalAlignment="Left" Height="28" Margin="517,412,0,0" VerticalAlignment="Top" Width="121" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="restart_Click" Grid.Column="1" BorderBrush="{x:Null}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background">
@@ -69,7 +69,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="exit" Content="Выход" HorizontalAlignment="Left" Height="28" Margin="634.5,412,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" FontSize="13" Foreground="#FF071632" Click="exit_Click" Grid.Column="1" BorderBrush="{x:Null}">
+        <Button x:Name="exit" Content="Выход" HorizontalAlignment="Left" Height="28" Margin="643,412,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" FontSize="13" Foreground="#FF071632" Click="exit_Click" Grid.Column="1" BorderBrush="{x:Null}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background">
@@ -103,7 +103,7 @@
             </Button.Style>
 
         </Button>
-        <Button x:Name="start" Content="Старт" HorizontalAlignment="Left" Height="28" Margin="561.5,368,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="start_Click" Grid.Column="1" BorderBrush="{x:Null}">
+        <Button x:Name="start" Content="Старт" HorizontalAlignment="Left" Height="28" Margin="583,366,0,0" VerticalAlignment="Top" Width="130" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FF071632" Click="start_Click" Grid.Column="1" BorderBrush="{x:Null}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background">
