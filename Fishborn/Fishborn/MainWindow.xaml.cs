@@ -265,9 +265,16 @@ namespace Fishborn
 
         private void exit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Вы действительно хотите выйти?", " ", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Вернуться в главное меню?", " ", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
+            {
+                HelloWindow hellowindow = new HelloWindow();
+                hellowindow.Show();
+                this.Close();
+            }
+
+            if (result == MessageBoxResult.No)
             {
                 this.Close();
             }

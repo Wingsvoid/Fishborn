@@ -19,12 +19,12 @@
             <ColumnDefinition Width="784*"/>
         </Grid.ColumnDefinitions>
         <Canvas x:Name="Field" HorizontalAlignment="Left" Height="397" Margin="10,10,0,0" VerticalAlignment="Top" Width="302" Grid.ColumnSpan="2"/>
-        <Canvas x:Name="Fishlist" HorizontalAlignment="Left" Height="397" Margin="301,10,0,0" VerticalAlignment="Top" Width="211" Grid.Column="1">
+        <Canvas x:Name="Fishlist" HorizontalAlignment="Left" Height="397" Margin="332,10,0,0" VerticalAlignment="Top" Width="180" Grid.Column="1">
             <Canvas.Background>
                 <ImageBrush ImageSource="Image/Fishlist.png"/>
             </Canvas.Background>
 
-            <ListBox x:Name="ListAllFish" Height="377" Canvas.Left="15" Canvas.Top="10" Width="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF8AC9EE" Style="{DynamicResource ListBoxStyle1}">
+            <ListBox x:Name="ListAllFish" Height="377" Canvas.Left="14" Canvas.Top="10" Width="160" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF8AC9EE" Style="{DynamicResource ListBoxStyle1}">
                 <ListBox.Resources>
                     <Style x:Key="ListBoxStyle1" TargetType="{x:Type ListBox}">
                         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>

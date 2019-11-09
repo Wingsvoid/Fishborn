@@ -62,6 +62,10 @@
     <Compile Include="Class\Generation.cs" />
     <Compile Include="Class\Selector.cs" />
     <Compile Include="Class\Simulation.cs" />
+    <Page Include="HelloWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,13 +76,23 @@
     </Compile>
     <Compile Include="Class\Fish.cs" />
     <Compile Include="Class\Storage.cs" />
+    <Compile Include="HelloWindow.xaml.cs">
+      <DependentUpon>HelloWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PlotWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Plant.cs" />
+    <Compile Include="PlotWindow.xaml.cs">
+      <DependentUpon>PlotWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

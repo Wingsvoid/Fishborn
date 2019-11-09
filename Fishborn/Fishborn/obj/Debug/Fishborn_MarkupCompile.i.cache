@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\study\dev\Fishborn\Fishborn\Fishborn\obj\Debug\
+D:\Fish\Fishborn\Fishborn\obj\Debug\
 Fishborn
 none
 false
 DEBUG;TRACE
-D:\study\dev\Fishborn\Fishborn\Fishborn\App.xaml
-11151548125
+D:\Fish\Fishborn\Fishborn\App.xaml
+384984657
 
-131069840913
-141699944268
-MainWindow.xaml;
+18-179868502
+14-562381944
+HelloWindow.xaml;MainWindow.xaml;PlotWindow.xaml;
 
-False
+True
 
