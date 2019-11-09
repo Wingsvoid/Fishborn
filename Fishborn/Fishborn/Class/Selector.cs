@@ -10,7 +10,6 @@ namespace Fishborn.Class
     {
         private List<List<Fish>> pairs;
         private List<Fish> fishes;
-        private int pairsCount;
         private bool isDebug;
         private Random rand;
         public Selector(List<Fish> fishes, bool debug)

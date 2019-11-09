@@ -121,13 +121,13 @@ namespace Fishborn
                 dispatcherTimer.Stop();
 
                 //генерация названия файла из текущего времени
-                //string name = DateTime.Now.ToString();
-                //name = name.Replace(".", "-").Replace(":", "-").Replace(" ", "_");
-                //string path = string.Format("{0}.json", name);
+                string name = DateTime.Now.ToString();
+                name = name.Replace(".", "-").Replace(":", "-").Replace(" ", "_");
+                string path = string.Format("{0}.json", name);
 
                 //сериализация хранилища и запись в json файл
-                //Storage endGameStats = new Storage(simulation.Generations);
-                //WriteJSONtoFile(path, endGameStats.Serialize());
+                Storage endGameStats = new Storage(simulation.Generations);
+                WriteJSONtoFile(path, endGameStats.Serialize());
 
                 //чтение json из файла и десериализация в хранилище
                 //string json = ReadJSONfromFile(path);
