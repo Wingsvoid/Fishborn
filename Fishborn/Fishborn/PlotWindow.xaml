@@ -8,13 +8,18 @@
         Title="PlotWindow" Height="450" Width="800" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
 
     <Window.Background>
-        <ImageBrush ImageSource="Image/seabottom2.png" Opacity="0.7"/>
+        <ImageBrush ImageSource="Image/seabottom2.png"/>
     </Window.Background>
 
     <Grid>
-        <Grid.Background>
-            <ImageBrush/>
-        </Grid.Background>
+
+
+        <Canvas x:Name="PlotField" HorizontalAlignment="Left" Height="464" Margin="-47,24,-43,-38" VerticalAlignment="Top" Width="890">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Image/PlotField.png" Opacity="0.85"/>
+            </Canvas.Background>
+        </Canvas>
+
 
         <Button x:Name="Plotload" Content="Загрузить статистику" HorizontalAlignment="Left" Height="45" Margin="10,10,0,0" VerticalAlignment="Top" Width="179" BorderBrush="{x:Null}" FontFamily="Times New Roman" FontSize="14" Click="Plotload_Click">
             <Button.Style>
@@ -107,11 +112,11 @@
         <Line Stroke="White" StrokeThickness="2" X1="770" Y1="430" X2="770" Y2="447"/>
 
 
-        <Line Stroke="WhiteSmoke" StrokeThickness="2" X1="20" Y1="380" X2="0" Y2="380"/>
-        <Line Stroke="WhiteSmoke" StrokeThickness="2" X1="20" Y1="320" X2="0" Y2="320"/>
-        <Line Stroke="WhiteSmoke" StrokeThickness="2" X1="20" Y1="260" X2="0" Y2="260"/>
-        <Line Stroke="WhiteSmoke" StrokeThickness="2" X1="20" Y1="200" X2="0" Y2="200"/>
-        <Line Stroke="WhiteSmoke" StrokeThickness="2" X1="20" Y1="140" X2="0" Y2="140"/>
+        <Line Stroke="White" StrokeThickness="2" X1="20" Y1="380" X2="2" Y2="380"/>
+        <Line Stroke="White" StrokeThickness="2" X1="20" Y1="320" X2="2" Y2="320"/>
+        <Line Stroke="White" StrokeThickness="2" X1="20" Y1="260" X2="2" Y2="260"/>
+        <Line Stroke="White" StrokeThickness="2" X1="20" Y1="200" X2="2" Y2="200"/>
+        <Line Stroke="White" StrokeThickness="2" X1="20" Y1="140" X2="2" Y2="140"/>
 
     </Grid>
 </Window>

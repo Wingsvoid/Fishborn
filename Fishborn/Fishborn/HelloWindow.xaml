@@ -16,11 +16,15 @@
             <ColumnDefinition Width="395*"/>
             <ColumnDefinition Width="397*"/>
         </Grid.ColumnDefinitions>
-        <Canvas x:Name="HelloField" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="430" Margin="10,10,0,0" VerticalAlignment="Top" Width="780"/>
-
-        <Canvas x:Name="ButtonCanvas" HorizontalAlignment="Left" Height="204" Margin="199,219,0,0" VerticalAlignment="Top" Width="172" Grid.Column="1">
+        <Canvas x:Name="HelloField" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="430" Margin="10,10,0,0" VerticalAlignment="Top" Width="780">
             <Canvas.Background>
-                <ImageBrush ImageSource="Image/Scrollbar.png"/>
+                <ImageBrush/>
+            </Canvas.Background>
+        </Canvas>
+
+        <Canvas x:Name="ButtonCanvas" Height="257" Margin="183,193,10,0" VerticalAlignment="Top" Grid.Column="1">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Image/PlotField.png"/>
             </Canvas.Background>
         </Canvas>
 
