@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using Newtonsoft.Json;
+using Fishborn.Class;
 
 namespace Fishborn
 {
@@ -44,14 +47,10 @@ namespace Fishborn
         List<Fish> listboxSource;
 
 
+
         public MainWindow()
         {
             InitializeComponent();
-
-           
-
-
-
             //создание кистей
             ib_RedFish = new ImageBrush();
             ib_YellowFish = new ImageBrush();
@@ -105,13 +104,35 @@ namespace Fishborn
             TimeStage.IsEnabled = false;
             SpeedSim.IsEnabled = false;
         }
+        private void WriteJSONtoFile(string path, string json)
+        {
+            File.WriteAllText(@path, json);
+        }
 
-
+        private string ReadJSONfromFile(string path)
+        {
+            string json = File.ReadAllText(@path);
+            return json;
+        }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             if (!simulation.IsProgress)
             {
                 dispatcherTimer.Stop();
+
+                //генерация названия файла из текущего времени
+                //string name = DateTime.Now.ToString();
+                //name = name.Replace(".", "-").Replace(":", "-").Replace(" ", "_");
+                //string path = string.Format("{0}.json", name);
+
+                //сериализация хранилища и запись в json файл
+                //Storage endGameStats = new Storage(simulation.Generations);
+                //WriteJSONtoFile(path, endGameStats.Serialize());
+
+                //чтение json из файла и десериализация в хранилище
+                //string json = ReadJSONfromFile(path);
+                //Storage loadGameStats = new Storage(json);
+
                 return;
             }
             timeNext = DateTime.Now;

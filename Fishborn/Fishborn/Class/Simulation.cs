@@ -28,6 +28,7 @@ namespace Fishborn
         public double MaxStageTime { get => maxStageTime; }
         public double SurviversCount { get => survCount; }
         public bool IsProgress { get => isProgress; }
+        public List<Generation> Generations { get => generations; }
         public Simulation(double _fieldSizeX, double _fieldSizeY,int _survCount, int _stageCount,  double _maxStageTime, double _gameSpeed)
         {
             random = new Random();

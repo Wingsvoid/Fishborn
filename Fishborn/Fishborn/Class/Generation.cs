@@ -9,31 +9,32 @@ namespace Fishborn.Class
 {
     class Generation
     {
-        public List<Fish> Fishes;
+        private List<Fish> fishes;
         private int id;
         public int Id { get => id; }
+        public List<Fish> Fishes { get => fishes; }
         public Generation ()
         {
             
-            Fishes = new List<Fish>();
+            fishes = new List<Fish>();
             id = 0;
             for (int i = 0; i < 10; i++)
             {
-                Fishes.Add(NewFish(i));
+                fishes.Add(NewFish(i));
             }
         }
         public Generation(Generation ancestors)
         {
             id = ancestors.Id + 1;
-            Fishes = new List<Fish>();
-            Selector selector = new Selector(ancestors.Fishes, debug:false);
+            fishes = new List<Fish>();
+            Selector selector = new Selector(ancestors.fishes, debug:false);
             Cross cross = new Cross();
             List<List<Fish>> parents;
             List<Fish> survivers = new List<Fish>();
             List<Fish> childrens = new List<Fish>();
 
 
-            foreach (Fish fish in ancestors.Fishes.Where(x => x.isAlive))
+            foreach (Fish fish in ancestors.fishes.Where(x => x.isAlive))
                     survivers.Add(fish);
 
             parents = selector.GetPairs(10 - survivers.Count);
@@ -50,8 +51,8 @@ namespace Fishborn.Class
                 }
             }
 
-            Fishes.AddRange(survivers);
-            Fishes.AddRange(childrens);
+            fishes.AddRange(survivers);
+            fishes.AddRange(childrens);
 
 
         }

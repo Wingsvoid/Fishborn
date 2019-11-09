@@ -31,6 +31,7 @@ namespace Fishborn
         public double Speed { get => speed; }
         public double SpeedMod { get => speedMod; }
         public double Visibility { get => isAltruistic ? AltVisibility() : visibility; }
+        public double FullVisibility { get => visibility; }
         public double VisibilityMod { get => visibilityMod; }
         public double Hunger_time { get => hungertime;}
         public double Hunger_timeMod { get => hungertimeMod; }
