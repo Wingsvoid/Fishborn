@@ -8,10 +8,14 @@
         Title="PlotWindow" Height="450" Width="800" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
 
     <Window.Background>
-        <ImageBrush ImageSource="Image/seabottom2.png"/>
+        <ImageBrush ImageSource="Image/seabottom2.png" Opacity="0.7"/>
     </Window.Background>
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+
         <Button x:Name="Plotload" Content="Загрузить статистику" HorizontalAlignment="Left" Height="45" Margin="10,10,0,0" VerticalAlignment="Top" Width="179" BorderBrush="{x:Null}" FontFamily="Times New Roman" FontSize="14" Click="Plotload_Click">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
@@ -75,6 +79,39 @@
                 </Style>
             </Button.Style>
         </Button>
+
+
+
+        <Line Stroke="WhiteSmoke" StrokeThickness="3" X1="10" Y1="100" X2="10" Y2="440"/>
+        <Line Stroke="WhiteSmoke" StrokeThickness="3" X1="10" Y1="440" X2="780" Y2="440"/>
+
+        <Line Stroke="White" StrokeThickness="2" X1="38.5" Y1="430" X2="38.5" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="77" Y1="430" X2="77" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="115.5" Y1="430" X2="115.5" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="154" Y1="430" X2="154" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="192.5" Y1="430" X2="192.5" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="231" Y1="430" X2="231" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="269.5" Y1="430" X2="269.5" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="308" Y1="430" X2="308" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="346.5" Y1="430" X2="346.5" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="385" Y1="430" X2="385" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="423.5" Y1="430" X2="423.5" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="462" Y1="430" X2="462" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="500.5" Y1="430" X2="500.5" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="539" Y1="430" X2="539" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="577.5" Y1="430" X2="577.5" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="616" Y1="430" X2="616" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="654.5" Y1="430" X2="654.5" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="693" Y1="430" X2="693" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="731.5" Y1="430" X2="731.5" Y2="447"/>
+        <Line Stroke="White" StrokeThickness="2" X1="770" Y1="430" X2="770" Y2="447"/>
+
+
+        <Line Stroke="WhiteSmoke" StrokeThickness="2" X1="20" Y1="380" X2="0" Y2="380"/>
+        <Line Stroke="WhiteSmoke" StrokeThickness="2" X1="20" Y1="320" X2="0" Y2="320"/>
+        <Line Stroke="WhiteSmoke" StrokeThickness="2" X1="20" Y1="260" X2="0" Y2="260"/>
+        <Line Stroke="WhiteSmoke" StrokeThickness="2" X1="20" Y1="200" X2="0" Y2="200"/>
+        <Line Stroke="WhiteSmoke" StrokeThickness="2" X1="20" Y1="140" X2="0" Y2="140"/>
 
     </Grid>
 </Window>

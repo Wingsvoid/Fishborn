@@ -23,6 +23,8 @@ namespace Fishborn
         public PlotWindow()
         {
             InitializeComponent();
+
+            
         }
 
        
