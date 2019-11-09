@@ -37,13 +37,17 @@ namespace Fishborn.Class
                     survivers.Add(fish);
 
             parents = selector.GetPairs(10 - survivers.Count);
-            //foreach (KeyValuePair<Fish, Fish> pair in parents)
-            //{
-            //    childrens.Add(cross.GiveBirth(pair.Key, pair.Value));
-            //}
-            for (int i = 0; i < 10 - survivers.Count; i++)
+            foreach(List<Fish> pair in parents)
             {
-                childrens.Add(NewFish(i));
+                List<double> childParams = cross.BreedResult(pair[0], pair[1]);
+                try
+                {
+                    childrens.Add(NewFish(childrens.Count(), childParams[0], childParams[1], childParams[2]));
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    MessageBox.Show("Ащибка");
+                }
             }
 
             Fishes.AddRange(survivers);
@@ -59,6 +63,13 @@ namespace Fishborn.Class
             double hungertime = rand.Next(10, 100);
             double summ = speed + visibility + hungertime;
             Fish fish = new Fish(id, id * 10 + i, speed / summ, visibility / summ, hungertime / summ, new Point(0, 0));
+            fish.SetDestination(new Point(0, 0));
+            return fish;
+        }
+        private Fish NewFish(int i, double speed, double visibility, double hungertime)
+        {
+
+            Fish fish = new Fish(id, id * 10 + i, speed, visibility, hungertime, new Point(0, 0));
             fish.SetDestination(new Point(0, 0));
             return fish;
         }
