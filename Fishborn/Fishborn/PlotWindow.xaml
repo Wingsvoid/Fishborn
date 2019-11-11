@@ -19,16 +19,22 @@
                 <ImageBrush ImageSource="Image/PlotField.png" Opacity="0.85"/>
             </Canvas.Background>
             <Canvas x:Name="RedPlot" Height="341" Canvas.Left="55" Canvas.Top="76" Width="792">
-                <Line Stroke="Red" StrokeThickness="5" X1="700" Y1="200" X2="700" Y2="220"/>
+                <!--<Line Stroke="Red" StrokeThickness="5" X1="700" Y1="200" X2="700" Y2="220"/>-->
+
             </Canvas>
             <Canvas x:Name="GreenPlot" Height="341" Canvas.Left="55" Canvas.Top="76" Width="792">
-                <Line Stroke="Green" StrokeThickness="5" X1="710" Y1="210" X2="710" Y2="230"/>
+                <!--<Line Stroke="Green" StrokeThickness="5" X1="710" Y1="210" X2="710" Y2="230"/>-->
+
             </Canvas>
 
             <Canvas x:Name="YellowPlot" Height="341" Canvas.Left="55" Canvas.Top="76" Width="792">
-                <Line Stroke="Yellow" StrokeThickness="5" X1="720" Y1="220" X2="720" Y2="240"/>
+                <!--<Line Stroke="Yellow" StrokeThickness="5" X1="720" Y1="220" X2="720" Y2="240"/>-->
+
             </Canvas>
         </Canvas>
+
+
+        
 
 
         <Button x:Name="Plotload" Content="Загрузить статистику" HorizontalAlignment="Left" Height="45" Margin="10,10,0,0" VerticalAlignment="Top" Width="179" BorderBrush="{x:Null}" FontFamily="Times New Roman" FontSize="14" Click="Plotload_Click">
@@ -96,11 +102,10 @@
         </Button>
 
 
-
         <Line Stroke="WhiteSmoke" StrokeThickness="3" X1="10" Y1="100" X2="10" Y2="440"/>
         <Line Stroke="WhiteSmoke" StrokeThickness="3" X1="10" Y1="440" X2="780" Y2="440"/>
 
-        <Line Stroke="White" StrokeThickness="2" X1="38.5" Y1="430" X2="38.5" Y2="447"/>
+        <!--<Line Stroke="White" StrokeThickness="2" X1="38.5" Y1="430" X2="38.5" Y2="447"/>
         <Line Stroke="White" StrokeThickness="2" X1="77" Y1="430" X2="77" Y2="447"/>
         <Line Stroke="White" StrokeThickness="2" X1="115.5" Y1="430" X2="115.5" Y2="447"/>
         <Line Stroke="White" StrokeThickness="2" X1="154" Y1="430" X2="154" Y2="447"/>
@@ -126,11 +131,11 @@
         <Line Stroke="White" StrokeThickness="2" X1="20" Y1="320" X2="2" Y2="320"/>
         <Line Stroke="White" StrokeThickness="2" X1="20" Y1="260" X2="2" Y2="260"/>
         <Line Stroke="White" StrokeThickness="2" X1="20" Y1="200" X2="2" Y2="200"/>
-        <Line Stroke="White" StrokeThickness="2" X1="20" Y1="140" X2="2" Y2="140"/>
+        <Line Stroke="White" StrokeThickness="2" X1="20" Y1="140" X2="2" Y2="140"/>-->
 
-        <CheckBox x:Name="SpeedCB" Content="Скорость" HorizontalAlignment="Left" Height="24" Margin="235,20,0,0" VerticalAlignment="Top" Width="78" Background="#FFDC1818" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="SpeedCB_Checked"/>
-        <CheckBox x:Name="VisibilatyCB" Content="Видимость" HorizontalAlignment="Left" Height="24" Margin="473,21,0,0" VerticalAlignment="Top" Width="87" Background="#FF00FF0C" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="VisibilatyCB_Checked"/>
-        <CheckBox x:Name="HungerTCB" Content="Насыщение" HorizontalAlignment="Left" Height="24" Margin="349,21,0,0" VerticalAlignment="Top" Width="96" Background="#FFFFDC00" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="HungerTCB_Checked"/>
+        <CheckBox x:Name="SpeedCB" Content="Скорость" HorizontalAlignment="Left" Height="24" Margin="235,20,0,0" VerticalAlignment="Top" Width="78" Background="#FFDC1818" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="SpeedCB_Checked" IsChecked="True" Unchecked="SpeedCB_Unchecked"/>
+        <CheckBox x:Name="VisibilatyCB" Content="Видимость" HorizontalAlignment="Left" Height="24" Margin="473,21,0,0" VerticalAlignment="Top" Width="87" Background="#FF00FF0C" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="VisibilatyCB_Checked" IsChecked="True" Unchecked="VisibilatyCB_Unchecked"/>
+        <CheckBox x:Name="HungerTCB" Content="Насыщение" HorizontalAlignment="Left" Height="24" Margin="349,21,0,0" VerticalAlignment="Top" Width="96" Background="#FFFFDC00" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="HungerTCB_Checked" IsChecked="True" Unchecked="HungerTCB_Unchecked"/>
 
     </Grid>
 </Window>

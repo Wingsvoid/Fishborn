@@ -29,16 +29,19 @@ namespace Fishborn.Class
         public GenerationStat(Generation generation)
         {
             generationID = generation.Id;
+            //переменные для расчёта средних значений
             speedSumm = 0;
             visibilitySumm = 0;
             hungerSumm = 0;
             fishCount = 0;
+            //начальные значения для поиска максимальный/минимальных параметров
             speedMax = double.MinValue;
             speedMin = double.MaxValue;
             visibilityMax = double.MinValue;
             visibilityMin = double.MaxValue;
             hungerMax = double.MinValue;
             hungerMin = double.MaxValue;
+            //подсчёт параметров каждой рыбы
             foreach (Fish fish in generation.Fishes)
             {
                 fishCount++;
