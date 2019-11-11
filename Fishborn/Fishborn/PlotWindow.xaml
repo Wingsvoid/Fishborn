@@ -128,9 +128,9 @@
         <Line Stroke="White" StrokeThickness="2" X1="20" Y1="200" X2="2" Y2="200"/>
         <Line Stroke="White" StrokeThickness="2" X1="20" Y1="140" X2="2" Y2="140"/>
 
-        <CheckBox x:Name="SpeedCB" Content="Скорость" HorizontalAlignment="Left" Height="24" Margin="235,20,0,0" VerticalAlignment="Top" Width="78" Background="#FFDC1818" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14"/>
-        <CheckBox x:Name="VisibilatyCB" Content="Видимость" HorizontalAlignment="Left" Height="24" Margin="473,21,0,0" VerticalAlignment="Top" Width="87" Background="#FF00FF0C" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14"/>
-        <CheckBox x:Name="VisibilatyCB_Copy" Content="Насыщение" HorizontalAlignment="Left" Height="24" Margin="349,21,0,0" VerticalAlignment="Top" Width="96" Background="#FFFFDC00" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14"/>
+        <CheckBox x:Name="SpeedCB" Content="Скорость" HorizontalAlignment="Left" Height="24" Margin="235,20,0,0" VerticalAlignment="Top" Width="78" Background="#FFDC1818" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="SpeedCB_Checked"/>
+        <CheckBox x:Name="VisibilatyCB" Content="Видимость" HorizontalAlignment="Left" Height="24" Margin="473,21,0,0" VerticalAlignment="Top" Width="87" Background="#FF00FF0C" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="VisibilatyCB_Checked"/>
+        <CheckBox x:Name="HungerTCB" Content="Насыщение" HorizontalAlignment="Left" Height="24" Margin="349,21,0,0" VerticalAlignment="Top" Width="96" Background="#FFFFDC00" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="HungerTCB_Checked"/>
 
     </Grid>
 </Window>

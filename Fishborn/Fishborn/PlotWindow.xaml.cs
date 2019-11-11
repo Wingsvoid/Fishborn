@@ -44,5 +44,28 @@ namespace Fishborn
             //openFileDialog.Filter = "Файлы json|*.json";
             //openFileDialog.InitialDirectory = Environment.CurrentDirectory;
         }
+
+        private void SpeedCB_Checked(object sender, RoutedEventArgs e)
+        {
+            //if (SpeedCB.IsChecked == true)
+            //{
+            //    RedPlot.Visibility = Visibility.Visible;
+            //}
+                        
+            //else if (SpeedCB.IsChecked == false)
+            //{
+            //    RedPlot.Visibility = Visibility.Hidden;
+            //}
+        }
+
+        private void HungerTCB_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void VisibilatyCB_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
