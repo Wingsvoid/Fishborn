@@ -35,6 +35,7 @@ namespace Fishborn
         ImageBrush ib_YellowFish;
         ImageBrush ib_GreenFish;
         ImageBrush ib_Plant;
+        ImageBrush ib_DeadFish;
 
         System.Windows.Threading.DispatcherTimer dispatcherTimer;
         DateTime timeStart;
@@ -56,12 +57,14 @@ namespace Fishborn
             ib_YellowFish = new ImageBrush();
             ib_GreenFish = new ImageBrush();
             ib_Plant = new ImageBrush();
+            ib_DeadFish = new ImageBrush();
 
             //источники изображения
             ib_RedFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/RedFish.png", UriKind.Absolute));
             ib_YellowFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/YellowFish.png", UriKind.Absolute));
             ib_GreenFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/GreenFish.png", UriKind.Absolute));
             ib_Plant.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/Plant.png", UriKind.Absolute));
+            ib_DeadFish.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/Image/DeadFish.png", UriKind.Absolute));
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -184,6 +187,7 @@ namespace Fishborn
                 }
                 if (!fish.isAlive)
                 {
+                    image = ib_DeadFish;
                     image.RelativeTransform = new ScaleTransform(1, -1, 0.5, 0.5);
                 }
                 rectangles[fish].Fill = image;
