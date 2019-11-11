@@ -126,8 +126,17 @@ namespace Fishborn
                 string path = string.Format("{0}.json", name);
 
                 //сериализация хранилища и запись в json файл
-                Storage endGameStats = new Storage(simulation.Generations);
-                WriteJSONtoFile(path, endGameStats.Serialize());
+                //Storage endGameStats = new Storage(simulation.Generations);
+                //WriteJSONtoFile(path, endGameStats.Serialize());
+                Dictionary<int, GenerationStat> allStat = new Dictionary<int, GenerationStat>();
+                foreach(Generation generation in simulation.Generations)
+                {
+                    GenerationStat stat = new GenerationStat(generation);
+                    allStat.Add(generation.Id, stat);
+                }
+                string json = "";
+                json = JsonConvert.SerializeObject(allStat);
+                File.WriteAllText(@path, json);
 
                 //чтение json из файла и десериализация в хранилище
                 //string json = ReadJSONfromFile(path);

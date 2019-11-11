@@ -41,14 +41,7 @@ namespace Fishborn.Class
             foreach(List<Fish> pair in parents)
             {
                 List<double> childParams = cross.BreedResult(pair[0], pair[1]);
-                try
-                {
-                    childrens.Add(NewFish(childrens.Count(), childParams[0], childParams[1], childParams[2]));
-                }
-                catch (IndexOutOfRangeException e)
-                {
-                    MessageBox.Show("Ащибка");
-                }
+                childrens.Add(NewFish(childrens.Count(), childParams[0], childParams[1], childParams[2]));
             }
 
             fishes.AddRange(survivers);
