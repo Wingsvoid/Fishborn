@@ -35,6 +35,11 @@ namespace Fishborn
         Dictionary<Point, Ellipse> hungerMinPoints;
         Dictionary<Point, Ellipse> hungerAveragePoints;
 
+        Dictionary<Point, Ellipse> AltAlivePoints;
+        Dictionary<Point, Ellipse> AltAllPoints;
+        Dictionary<Point, Ellipse> EgoAlivePoints;
+        Dictionary<Point, Ellipse> EgoAllPoints;
+
         List<GenerationStat> statistics;
 
         public PlotWindow()
@@ -49,6 +54,10 @@ namespace Fishborn
             hungerMaxPoints = new Dictionary<Point, Ellipse>();
             hungerMinPoints = new Dictionary<Point, Ellipse>();
             hungerAveragePoints = new Dictionary<Point, Ellipse>();
+            AltAlivePoints = new Dictionary<Point, Ellipse>();
+            AltAllPoints = new Dictionary<Point, Ellipse>();
+            EgoAlivePoints = new Dictionary<Point, Ellipse>();
+            EgoAllPoints = new Dictionary<Point, Ellipse>();
             statistics = new List<GenerationStat>();
             DrawGraphic();
         }
@@ -63,7 +72,7 @@ namespace Fishborn
         {
             double height = 341;
             
-            double yPos = height - height*y*1.5;
+            double yPos = height - height*y;
             return yPos;
         }
         private Ellipse AddPoint(bool full, string parameter, double yPos, double xPos)
@@ -89,6 +98,14 @@ namespace Fishborn
                 case "hunger":
                     thatCanvas = YellowPlot;
                     myBrush = Brushes.Yellow;
+                    break;
+                case "AltAlive":
+                    thatCanvas = AltAlivePlot;
+                    myBrush = Brushes.White;
+                    break;
+                case "EgoAlive":
+                    thatCanvas = EgoAlivePlot;
+                    myBrush = Brushes.Orange;
                     break;
                 default:
                     break;
@@ -124,6 +141,14 @@ namespace Fishborn
                 case "hunger":
                     thatCanvas = YellowPlot;
                     myBrush = Brushes.Yellow;
+                    break;
+                case "AltAlive":
+                    thatCanvas = AltAlivePlot;
+                    myBrush = Brushes.White;
+                    break;
+                case "EgoAlive":
+                    thatCanvas = EgoAlivePlot;
+                    myBrush = Brushes.Orange;
                     break;
                 default:
                     break;
@@ -163,6 +188,25 @@ namespace Fishborn
                     AddPoint(false, "hunger", YCoordToYPos(stat.HungerMin), XCoordToXPos(stat.GenerationID)));
                 hungerAveragePoints.Add(new Point(XCoordToXPos(stat.GenerationID), YCoordToYPos(stat.HungerAverage)), 
                     AddPoint(true, "hunger", YCoordToYPos(stat.HungerAverage), XCoordToXPos(stat.GenerationID)));
+
+
+                TextBlock text3 = new TextBlock();
+                AltAlivePoints.Add(new Point(XCoordToXPos(stat.GenerationID), YCoordToYPos(stat.AltruistAlive / 10)),
+                    AddPoint(true, "AltAlive", YCoordToYPos(stat.AltruistAlive / 10), XCoordToXPos(stat.GenerationID)));
+                text3.Text = stat.AltruistAlive.ToString();
+                text3.FontSize = 10;
+                text3.Foreground = Brushes.White;
+                AltAlivePlot.Children.Add(text3);
+                text3.RenderTransform = new TranslateTransform(XCoordToXPos(stat.GenerationID), YCoordToYPos(stat.AltruistAlive / 10) + 8);
+
+                EgoAlivePoints.Add(new Point(XCoordToXPos(stat.GenerationID), YCoordToYPos(stat.EgoistAlive / 10)),
+                    AddPoint(true, "EgoAlive", YCoordToYPos(stat.EgoistAlive / 10), XCoordToXPos(stat.GenerationID)));
+                TextBlock text4 = new TextBlock();
+                text4.Text = stat.EgoistAlive.ToString();
+                text4.FontSize = 10;
+                text4.Foreground = Brushes.Orange;
+                EgoAlivePlot.Children.Add(text4);
+                text4.RenderTransform = new TranslateTransform(XCoordToXPos(stat.GenerationID), YCoordToYPos(stat.EgoistAlive/10) +8);
             }
             for (int i=0; i< speedAveragePoints.Count-1; i++)
             {
@@ -175,6 +219,14 @@ namespace Fishborn
             for (int i = 0; i < hungerAveragePoints.Count - 1; i++)
             {
                 AddLine(true, "hunger", hungerAveragePoints.Keys.ElementAt(i), hungerAveragePoints.Keys.ElementAt(i+1));
+            }
+            for (int i = 0; i < hungerAveragePoints.Count - 1; i++)
+            {
+                AddLine(true, "AltAlive", AltAlivePoints.Keys.ElementAt(i), AltAlivePoints.Keys.ElementAt(i + 1));
+            }
+            for (int i = 0; i < hungerAveragePoints.Count - 1; i++)
+            {
+                AddLine(true, "EgoAlive", EgoAlivePoints.Keys.ElementAt(i), EgoAlivePoints.Keys.ElementAt(i + 1));
             }
 
 
@@ -245,6 +297,30 @@ namespace Fishborn
         {
             GreenPlot.Visibility = Visibility.Hidden;
             GreenPlot.UpdateLayout();
+        }
+
+        private void AEAllTCB_Checked(object sender, RoutedEventArgs e)
+        {
+            AltAlivePlot.Visibility = Visibility.Visible;
+            AltAlivePlot.UpdateLayout();
+        }
+
+        private void AEAllTCB_Unchecked(object sender, RoutedEventArgs e)
+        {
+            AltAlivePlot.Visibility = Visibility.Hidden;
+            AltAlivePlot.UpdateLayout();
+        }
+
+        private void AEAliveTCB_Unchecked(object sender, RoutedEventArgs e)
+        {
+            EgoAlivePlot.Visibility = Visibility.Hidden;
+            EgoAlivePlot.UpdateLayout();
+        }
+
+        private void AEAliveTCB_Checked(object sender, RoutedEventArgs e)
+        {
+            EgoAlivePlot.Visibility = Visibility.Visible;
+            EgoAlivePlot.UpdateLayout();
         }
     }
 }

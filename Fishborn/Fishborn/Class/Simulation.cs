@@ -51,10 +51,30 @@ namespace Fishborn
             stageTime += time;
             if ((stageTime >= maxStageTime) || (Fishes.FindAll(x => x.isAlive).Count <=survCount))
             {
+                //foreach (Fish fish in Fishes)
+                //{
+                //    if (fish.isAlive)
+                //    {
+                //        fish.isSurvived = true;
+                //    }
+                //    else
+                //        fish.isSurvived = false;
+                //}
                 stageTime = 0;
                 stageId++;
                 if (stageId == stageCount)
                 {
+                    foreach (Fish fish in generations[generations.Count-1].Fishes)
+                    {
+                        if (fish.isAlive && fish.IsAltruistic)
+                        {
+                            generations[generations.Count - 1].AltruistsSurvive++;
+                        }
+                        else if (fish.isAlive && !fish.IsAltruistic)
+                        {
+                            generations[generations.Count - 1].EgoistsSurvive++;
+                        }
+                    }
                     isProgress = false;
                     return;
                 }
@@ -67,9 +87,10 @@ namespace Fishborn
             }
             foreach (Fish fish in Fishes)
             {
+                fish.UpTime(time);
                 if (fish.isAlive)
                 {
-                    fish.UpTime(time);
+                    
                     foreach (Plant plant in Plants)
                     {
                         if (plant.isActive)

@@ -24,6 +24,7 @@ namespace Fishborn
         private double starvingtime;
         private double lifetime;
         private bool alive;
+        private bool survived;
         
         public bool IsAltruistic {get => isAltruistic; }
         public int Id { get => id; }
@@ -41,7 +42,9 @@ namespace Fishborn
         public Vector Direction { get => direction; }
         public Point Destination { get => destination; }
         public bool isAlive { get => alive; }
-        public Fish(int _genId, int _id, double _speed, double _visibility, double _hungertime, Point _pos)
+        public bool isSurvived { get => survived; set => survived = value; }
+
+        public Fish(int _genId, int _id, double _speed, double _visibility, double _hungertime, Point _pos, bool _altruistic)
         {
             genId = _genId;
             id = _id;
@@ -55,7 +58,8 @@ namespace Fishborn
             starvingtime = 0;
             lifetime = 0;
             alive = true;
-            isAltruistic = AltruistRandom((int)visibility);
+            isAltruistic = _altruistic;
+            isSurvived = false;
         }
         public void UpTime(double time)
         {

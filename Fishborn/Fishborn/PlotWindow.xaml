@@ -31,10 +31,18 @@
                 <!--<Line Stroke="Yellow" StrokeThickness="5" X1="720" Y1="220" X2="720" Y2="240"/>-->
 
             </Canvas>
+            <Canvas x:Name="EgoAlivePlot" Height="341" Canvas.Left="55" Canvas.Top="76" Width="792">
+                <!--<Line Stroke="Yellow" StrokeThickness="5" X1="720" Y1="220" X2="720" Y2="240"/>-->
+
+            </Canvas>
+            <Canvas x:Name="AltAlivePlot" Height="341" Canvas.Left="55" Canvas.Top="76" Width="792">
+                <!--<Line Stroke="Yellow" StrokeThickness="5" X1="720" Y1="220" X2="720" Y2="240"/>-->
+
+            </Canvas>
         </Canvas>
 
 
-        
+
 
 
         <Button x:Name="Plotload" Content="Загрузить статистику" HorizontalAlignment="Left" Height="45" Margin="10,10,0,0" VerticalAlignment="Top" Width="179" BorderBrush="{x:Null}" FontFamily="Times New Roman" FontSize="14" Click="Plotload_Click">
@@ -136,6 +144,8 @@
         <CheckBox x:Name="SpeedCB" Content="Скорость" HorizontalAlignment="Left" Height="24" Margin="235,20,0,0" VerticalAlignment="Top" Width="78" Background="#FFDC1818" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="SpeedCB_Checked" IsChecked="True" Unchecked="SpeedCB_Unchecked"/>
         <CheckBox x:Name="VisibilatyCB" Content="Видимость" HorizontalAlignment="Left" Height="24" Margin="473,21,0,0" VerticalAlignment="Top" Width="87" Background="#FF00FF0C" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="VisibilatyCB_Checked" IsChecked="True" Unchecked="VisibilatyCB_Unchecked"/>
         <CheckBox x:Name="HungerTCB" Content="Насыщение" HorizontalAlignment="Left" Height="24" Margin="349,21,0,0" VerticalAlignment="Top" Width="96" Background="#FFFFDC00" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" Checked="HungerTCB_Checked" IsChecked="True" Unchecked="HungerTCB_Unchecked"/>
+        <CheckBox x:Name="AltAliveAllTCB" Content="Альтруисты" HorizontalAlignment="Left" Height="24" Margin="273,44,0,0" VerticalAlignment="Top" Width="93" Background="White" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" IsChecked="True" Checked="AEAllTCB_Checked" Unchecked="AEAllTCB_Unchecked"/>
+        <CheckBox x:Name="EgoAliveTCB" Content="Эгоисты" HorizontalAlignment="Left" Height="24" Margin="402,44,0,0" VerticalAlignment="Top" Width="92" Background="Orange"  BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="14" IsChecked="True" Unchecked="AEAliveTCB_Unchecked" Checked="AEAliveTCB_Checked"/>
 
     </Grid>
 </Window>

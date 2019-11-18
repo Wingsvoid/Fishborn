@@ -22,6 +22,10 @@ namespace Fishborn.Class
         private double hungerMax;
         private double hungerMin;
         private double hungerAverage;
+        private double altruistAll;
+        private double altruistAlive;
+        private double egoistAll;
+        private double egoistAlive;
         public GenerationStat()
         {
 
@@ -34,6 +38,10 @@ namespace Fishborn.Class
             visibilitySumm = 0;
             hungerSumm = 0;
             fishCount = 0;
+            altruistAll = 0;
+            altruistAlive = generation.AltruistsSurvive;
+            egoistAll = 0;
+            egoistAlive = generation.EgoistsSurvive ;
             //начальные значения для поиска максимальный/минимальных параметров
             speedMax = double.MinValue;
             speedMin = double.MaxValue;
@@ -54,20 +62,36 @@ namespace Fishborn.Class
                 visibilityMin = Math.Min(visibilityMin, fish.VisibilityMod);
                 hungerMax = Math.Max(hungerMax, fish.Hunger_timeMod);
                 hungerMin = Math.Min(hungerMin, fish.Hunger_timeMod);
+                if (fish.IsAltruistic)
+                {
+                    altruistAll++;
+                    //if (fish.isSurvived)
+                    //{
+                    //    altruistAlive++;
+                    //}
+                }
+                else
+                {
+                    egoistAll++;
+                //    if (fish.isSurvived)
+                //    {
+                //        egoistAlive++;
+                //    }
+                }
             }
             speedAverage = speedSumm / fishCount;
             visibilityAverage = visibilitySumm / fishCount;
             hungerAverage = hungerSumm / fishCount;
         }
 
-        public string StatToString()
-        {
-            string statistic = "";
-            statistic = ", speedMax: " + SpeedMax + ", speedMin: " + SpeedMin + ", speedAverage: " + SpeedAverage +
-                ", visibilityMax: " + visibilityMax + ", visibilityMin: " + visibilityMin + ", visibilityAverage: " + visibilityAverage +
-                ", hungerMax: " + hungerMax + ", hungerMin: " + hungerMin + ", hungerAverage: " + hungerAverage + "\n";
-            return statistic;
-        }
+        //public string StatToString()
+        //{
+        //    string statistic = "";
+        //    statistic = ", speedMax: " + SpeedMax + ", speedMin: " + SpeedMin + ", speedAverage: " + SpeedAverage +
+        //        ", visibilityMax: " + visibilityMax + ", visibilityMin: " + visibilityMin + ", visibilityAverage: " + visibilityAverage +
+        //        ", hungerMax: " + hungerMax + ", hungerMin: " + hungerMin + ", hungerAverage: " + hungerAverage + "\n";
+        //    return statistic;
+        //}
         public int GenerationID { get => generationID; set => generationID = value; }
         public int FishCount { get => fishCount; set => fishCount = value; }
         public double SpeedMax { get => speedMax; set => speedMax = value; }
@@ -79,5 +103,9 @@ namespace Fishborn.Class
         public double HungerMax { get => hungerMax; set => hungerMax = value; }
         public double HungerMin { get => hungerMin; set => hungerMin = value; }
         public double HungerAverage { get => hungerAverage; set => hungerAverage = value; }
+        public double AltruistAll { get => altruistAll; set => altruistAll = value; }
+        public double AltruistAlive { get => altruistAlive; set => altruistAlive = value; }
+        public double EgoistAll { get => egoistAll; set => egoistAll = value; }
+        public double EgoistAlive { get => egoistAlive; set => egoistAlive = value; }
     }
 }
